@@ -1,0 +1,9 @@
+Config Files
+============
+My basic config files.
+
+`.vimrc` for vim.
+
+`.zshrc` for zsh.
+
+`.screenrc` for GNU screen.
