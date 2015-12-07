@@ -79,8 +79,11 @@ endif " has("autocmd")
 "	Et plus de choses ici, par le Camarade.
 
 set autoindent
-set tabstop=4
+set tabstop=2
 set nohlsearch
 set nobackup
-set bg=light
+set bg=dark
 set expandtab
+set sw=2
+
+execute pathogen#infect()
