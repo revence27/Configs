@@ -64,11 +64,12 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git rails ruby)
 
 # User configuration
 
   export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -102,6 +103,7 @@ export PAGER=less
 export EDITOR=vim
 export CVSEDITOR=$EDITOR
 export BROWSER='w3m -T text/html'
+export GOROOT="/home/revence/Documents/Hacks/sundry/go_appengine"
 
 export DISPLAY=:0
 
@@ -116,8 +118,8 @@ alias ping='ping -a'
 alias ssu='sudo su'
 alias sml='rlwrap sml'
 alias ocaml='rlwrap ocaml'
-alias youtube-dl='youtube-dl --no-playlist -f18'
-alias yautube-dl='youtube-dl -xk --audio-format mp3 --audio-quality 0 -f18'
+alias youtube-dl='youtube-dl --no-part -o "%(title)s-%(format)s-%(id)s.%(ext)s" --no-playlist -f18'
+alias yautube-dl='youtube-dl --no-part -A -xk --audio-format mp3 --audio-quality 0 -f18'
 alias wget='wget -Sc'
 alias ssu='sudo su ; exit'
 alias pivotapp="ssh -t pivotweb 'ssh apps -t tmux attach'"
@@ -140,3 +142,4 @@ mkcd()
 	mkdir -p "$1" && cd "$1"
 }
 
+export set PATH="$GOROOT:$PATH"
