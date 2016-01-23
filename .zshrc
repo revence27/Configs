@@ -115,18 +115,20 @@ export LC_CTYPE=en_GB.UTF-8
 
 alias ls='ls --color'
 alias ping='ping -a'
-alias ssu='sudo su'
 alias sml='rlwrap sml'
 alias ocaml='rlwrap ocaml'
 alias youtube-dl='youtube-dl --no-part -o "%(title)s-%(format)s-%(id)s.%(ext)s" --no-playlist -f18'
-alias yautube-dl='youtube-dl --no-part -A -xk --audio-format mp3 --audio-quality 0 -f18'
+alias yautube-dl='/usr/bin/youtube-dl --no-part -A -xk --audio-format mp3 --audio-quality 0 -f18'
 alias wget='wget -Sc'
-alias ssu='sudo su ; exit'
+# alias ssu='sudo su ; exit'
+# alias ssu="tmux split-window 'sudo su ; exit'"
 alias pivotapp="ssh -t pivotweb 'ssh apps -t tmux attach'"
 alias mpg123='mpg123 -C'
 alias guile='rlwrap guile'
 alias racket='rlwrap racket'
 alias bobot='bobot++ -d ~/.bobot/'
+alias asdfg='setxkbmap -option compose:caps -variant intl dvorak'
+alias aoeui='setxkbmap -option compose:caps -variant intl dvorak'
 
 bindkey -v
 
@@ -134,7 +136,6 @@ bindkey -v
 # RPROMPT=" %(?.%U%T%u.$(print '%{\e[1;31m%}%?%{\e[0m%}'))"
 
 #	Util functions ...
-source ~/.bin/tmuxinator.zsh
 
 #	Equivalent to mkdir x && cd x
 mkcd()
@@ -142,4 +143,10 @@ mkcd()
 	mkdir -p "$1" && cd "$1"
 }
 
-export set PATH="$GOROOT:$PATH"
+ssu()
+{
+  tmux split-window $* 'sudo su; exit'
+}
+
+export set ISSM_ROOT="/home/revence/intel/issm_2016.0.019"
+export set PATH="/home/revence/.local/bin:$ISSM_ROOT:$ISSM_ROOT/tools/compiler/bin:/home/revence/Documents/Hacks/sundry/bin:$GOROOT:$PATH"

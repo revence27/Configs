@@ -78,6 +78,38 @@ endif " has("autocmd")
 "	And more stuff here, by the Comrade
 "	Et plus de choses ici, par le Camarade.
 
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+    \ }
+
+execute pathogen#infect()
+syntax enable
+filetype plugin indent on
+
 set autoindent
 set tabstop=2
 set nohlsearch
@@ -85,5 +117,4 @@ set nobackup
 set bg=dark
 set expandtab
 set sw=2
-
-execute pathogen#infect()
+set gfn=CMU\ Typewriter\ Text\ Ultra-Light\ 13
