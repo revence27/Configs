@@ -10,7 +10,7 @@
   (system* "tmux" "split-window" "-h" "-p" "30" "w3m http://webmail.pivotaccess.com/")
   (system* "tmux" "split-window" "-v" "-t" "1" "-p" "30" "-c" "/home/revence/Desktop/Misc/Music" "zsh")
   (system* "tmux" "split-window" "-v" "-t" "0" "-p" "20" "-c" "/home/revence/Downloads/vidfiles")
-  (system* "tmux" "split-window" "-h" "-t" "3" "-p" "70" "weechat irc://LeCamarade@camarade@irc.freenode.net/#haskell,#yesod\n")
+  (system* "tmux" "split-window" "-h" "-t" "3" "-p" "70" "weechat irc://LeCamarade:camarade@irc.freenode.net/#haskell,#yesod\n")
   (system* "tmux" "send-keys" "-t" "0" "I")
   (system* "tmux" "send-keys" "-t" "2" "mpg123 -CZ *.mp3" "C-l")
 )
