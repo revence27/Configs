@@ -14,7 +14,7 @@ tmux send-keys -t 1 TU C-u 'http://localhost:3000/' C-m
 tmux send-keys -t 1 '{{{'
 tmux rename-window -t 0 'Controls'
 
-cd ~/Documents/Hacks/sundry/todolist 
+cd ~/Documents/Hacks/sundry/todolist
 tmux new-window -n 'Hackings' 'vi -S config/ide.vim'
 tmux set-option remain-on-exit on
 tmux split-window -h -p 30 'psql todolist todolist'

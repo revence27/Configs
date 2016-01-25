@@ -1,0 +1,85 @@
+#!  /usr/bin/env guile
+!#
+
+(use-modules (srfi srfi-1))
+
+(define (morning-session x)
+  (system* "tmux" "new-session" "-AD" "-s" x)
+  (system* "tmux" "new-window" "-n" "morn" "mutt")
+  (system* "tmux" "set-option" "remain-on-exit" "on")
+  (system* "tmux" "split-window" "-h" "-p" "30" "w3m http://webmail.pivotaccess.com/")
+  (system* "tmux" "split-window" "-v" "-t" "1" "-p" "30" "-c" "/home/revence/Desktop/Misc/Music" "zsh")
+  (system* "tmux" "split-window" "-v" "-t" "0" "-p" "20" "-c" "/home/revence/Downloads/vidfiles")
+  (system* "tmux" "split-window" "-h" "-t" "3" "-p" "70" "weechat irc://LeCamarade@camarade@irc.freenode.net/#haskell,#yesod\n")
+  (system* "tmux" "send-keys" "-t" "0" "I")
+  (system* "tmux" "send-keys" "-t" "2" "mpg123 -CZ *.mp3" "C-l")
+)
+
+(define (workhack-session x)
+  (chdir "/home/revence/Documents/Hacks/sundry/todolist")
+  (system* "tmux" "new-session" "-AD" "-s" x)
+  (system* "tmux" "new-window" "-n" "yesodier")
+  (system* "tmux" "set-option" "remain-on-exit" "on")
+  (system* "tmux" "split-window" "-v" "-p" "15" "ocaml")
+  (system* "tmux" "split-window" "-v" "-t" "0" "-p" "75" "stack build && stack exec -- yesod devel")
+  (system* "tmux" "split-window" "-h" "-t" "0" "-p" "85" "ruby -e 'loop {system %[sl -l]}'")
+  (system* "tmux" "split-window" "-h" "-t" "3" "-p" "70" "git log")
+  (system* "tmux" "split-window" "-h" "-t" "2" "-p" "80" "vim -S config/ide.vim")
+  (system* "tmux" "split-window" "-h" "-t" "5" "-p" "25" "w3m http://webmail.pivotaccess.com/")
+  (system* "tmux" "split-window" "-h" "-t" "1" "-p" "40" "ghci")
+  (system* "tmux" "split-window" "-h" "-t" "1" "-p" "40" "guile")
+  (system* "tmux" "split-window" "-h" "-t" "1" "-p" "50" "sml")
+  (system* "tmux" "clock-mode" "-t" "0")
+)
+
+(define (basehack-session x)
+  (system* "tmux" "new-session" "-AD" "-s" x)
+  (system* "tmux" "new-window" "mutt")
+  (system* "tmux" "set-option" "remain-on-exit" "on")
+  (system* "tmux" "split-window" "-h" "-p" "30" "w3m http://webmail.pivotaccess.com/")
+  (system* "tmux" "split-window" "-v" "-p" "25" "-t" "1" "-c" "/home/revence/Desktop/Misc/Music" "zsh")
+  (system* "tmux" "send-keys" "-t" "0" "I")
+  (system* "tmux" "send-keys" "-t" "2" "mpg123 -ZC *.mp3" "C-l")
+  (system* "tmux" "send-keys" "-t" "1" "TU" "C-u" "http://rt.com/" "C-m")
+  (system* "tmux" "send-keys" "-t" "1" "TU" "C-u" "http://news.vice.com/'" "C-m")
+  (system* "tmux" "send-keys" "-t" "1" "TU" "C-u" "http://localhost:3000/'" "C-m")
+  (system* "tmux" "send-keys" "-t" "1" "{{{")
+  (system* "tmux" "rename-window" "-t" "0" "Controls")
+  (chdir "/home/revence/Documents/Hacks/sundry/todolist")
+  (system* "tmux" "new-window" "-n" "Hackings" "vi -S config/ide.vim")
+  (system* "tmux" "set-option" "remain-on-exit" "on")
+  (system* "tmux" "split-window" "-h" "-p" "30" "psql todolist todolist")
+  (system* "tmux" "split-window" "-v" "-p" "70" "-t" "1" "stack build && stack exec -- yesod devel")
+  (system* "tmux" "move-window" "-s" "0" "-t" "3")
+  (system* "tmux" "move-window" "-s" "1" "-t" "0")
+  (system* "tmux" "move-window" "-s" "2" "-t" "1")
+  (system* "tmux" "kill-window" "-t" "3")
+)
+
+(define (mainer)
+  (let*
+    (
+      (them
+        (cons
+          (cons 'basic morning-session)
+          (cons
+            (cons 'work workhack-session)
+            (cons
+              (cons 'hacks basehack-session)
+              '()
+            )
+          )
+        )
+      )
+      (sname (car (append (cdr (command-line)) (cons (caar them) '()))))
+      (got (assq (string->symbol sname) them))
+    )
+    (if got
+      ((cdr got) sname)
+      1)
+  )
+)
+
+(exit (mainer))
+
+; vim: syntax=scheme
