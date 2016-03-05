@@ -117,18 +117,19 @@ alias ls='ls --color'
 alias ping='ping -a'
 alias sml='rlwrap sml'
 alias ocaml='rlwrap ocaml'
-alias youtube-dl='youtube-dl --write-sub --sub-lang en,fr --no-part -o "%(title)s-%(format)s-%(id)s.%(ext)s" --no-playlist -f18'
-alias yautube-dl='/usr/bin/youtube-dl --no-part -A -xk --audio-format mp3 --audio-quality 0 -f18'
+alias youtube-dl='youtube-dl --write-sub --sub-lang en,fr --no-part -o "%(title)s-%(format)s-%(id)s.%(ext)s" --no-playlist -fbest'
+alias yautube-dl='/usr/bin/youtube-dl --no-part -A -xk --audio-format mp3 --audio-quality 0 -fbest'
 alias wget='wget -Sc'
 # alias ssu='sudo su ; exit'
 # alias ssu="tmux split-window 'sudo su ; exit'"
-alias pivotapp="ssh -t pivotweb 'ssh apps -t tmux attach'"
+alias pivotapp="ssh -t pivotweb 'ssh -t apps env LD_LIBRARY_PATH=/usr/local/lib:/lib:/usr/lib tmux attach'"
 alias mpg123='mpg123 -C'
 alias guile='rlwrap guile'
 alias racket='rlwrap racket'
 alias bobot='bobot++ -d ~/.bobot/'
 alias asdfg='setxkbmap -option compose:caps -variant intl dvorak'
 alias aoeui='setxkbmap -option compose:caps -variant intl dvorak'
+alias rails='rlwrap rails'
 
 bindkey -v
 
@@ -148,5 +149,17 @@ ssu()
   tmux split-window $* 'sudo su; exit'
 }
 
+_macronesia()
+{
+  local -a options
+  options=(web fetch pull mixer singer train)
+  _describe 'values' options
+}
+
+compdef _macronesia macronesia
+
 export set ISSM_ROOT="/home/revence/intel/issm_2016.0.019"
+export set IAMCU_TOOLCHAIN_DIR="$ISSM_ROOT/tools/tools"
+export set DLDIR="/home/revence/Downloads"
+export set YTDIR="$DLDIR/vidfiles/yt"
 export set PATH="/home/revence/.local/bin:$ISSM_ROOT:$ISSM_ROOT/tools/compiler/bin:/home/revence/Documents/Hacks/sundry/bin:$GOROOT:$PATH"

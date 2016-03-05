@@ -115,6 +115,11 @@ set tabstop=2
 set nohlsearch
 set nobackup
 set bg=dark
+if v:progname =~? "gvim"
+  set bg=light
+endif
 set expandtab
 set sw=2
 set gfn=CMU\ Typewriter\ Text\ Ultra-Light\ 13
+digraph ZZ 8484
+digraph \\ 955
