@@ -2,111 +2,45 @@
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
+PROMPT="%B%n@%m:%2c%b%# "
+RPROMPT=" %(?.%U%T%u.$(print '%{\e[1;31m%}%?%{\e[0m%}'))"
+
 setopt appendhistory autocd extendedglob notify
 unsetopt nomatch
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-#	zstyle :compinstall filename '/home/revence/.zshrc'
-
 autoload -Uz compinit
 compinit
-# End of lines added by compinstall
 
-
-# Path to your oh-my-zsh installation.
-  export ZSH=/home/revence/.oh-my-zsh
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
+export ZSH=/home/revence/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git rails ruby)
 
 # User configuration
-
-  export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
+export set ISSM_ROOT="$HOME/intel/issm_2016.0.019"
+export set IAMCU_TOOLCHAIN_DIR="$ISSM_ROOT/tools/tools"
+export set DLDIR="$HOME/Downloads"
+export set YTDIR="$DLDIR/vidfiles/yt"
+export set HACKS="$HOME/Documents/Hacks"
+export set RAKBREW="$HOME/.rakudobrew"
+export set P6BREWS="$RAKBREW/moar-nom"
+export set P6HACKS="$HACKS/sundry/rakudo-star-2016.04"
+export set P61="$P6BREWS/install/bin:$P6BREWS/install/share/perl6/site/bin"
+export set P62="$P6HACKS/install/bin:$P6HACKS/install/share/perl6/site/bin"
+export set LD_LIBRARY_PATH="$P6BREWS/install/lib:$P6HACKS/install/lib:/usr/local/lib:$LD_LIBRARY_PATH:/usr/lib:/usr/lib32"
+export set PATH="$P61:$P62:$RAKBREW/bin:$HOME/.local/bin:$ISSM_ROOT:$ISSM_ROOT/tools/compiler/bin:$HACKS/sundry/bin:$GOROOT:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$PATH"
+export MANPATH="/usr/local/man:$MANPATH"
 source $ZSH/oh-my-zsh.sh
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
 
 # ssh
 export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
 export PAGER=less
 export EDITOR=vim
 export CVSEDITOR=$EDITOR
 export BROWSER='w3m -T text/html'
+export DESKTOP="$HOME/Desktop"
 export GOROOT="/home/revence/Documents/Hacks/sundry/go_appengine"
-
 export DISPLAY=:0
-
 export LC_ALL=en_GB.UTF-8
 export LANGUAGE=en_GB
 export LANG=en_GB
@@ -117,6 +51,7 @@ alias ls='ls --color'
 alias ping='ping -a'
 alias sml='rlwrap sml'
 alias ocaml='rlwrap ocaml'
+alias yout='youloader --dest=/home/revence/Desktop/pendyt --pause=60'
 alias youtube-dl='youtube-dl --write-sub --sub-lang en,fr --no-part -o "%(title)s-%(format)s-%(id)s.%(ext)s" --no-playlist -fbest'
 alias yautube-dl='/usr/bin/youtube-dl --no-part -A -xk --audio-format mp3 --audio-quality 0 -fbest'
 alias wget='wget -Sc'
@@ -130,15 +65,10 @@ alias bobot='bobot++ -d ~/.bobot/'
 alias asdfg='setxkbmap -option compose:caps -variant intl dvorak'
 alias aoeui='setxkbmap -option compose:caps -variant intl dvorak'
 alias rails='rlwrap rails'
+alias irb='rlwrap irb'
 
 bindkey -v
 
-# PROMPT="%B%n@%m:%2c%b%# "
-# RPROMPT=" %(?.%U%T%u.$(print '%{\e[1;31m%}%?%{\e[0m%}'))"
-
-#	Util functions ...
-
-#	Equivalent to mkdir x && cd x
 mkcd()
 {
 	mkdir -p "$1" && cd "$1"
@@ -156,10 +86,25 @@ _macronesia()
   _describe 'values' options
 }
 
-compdef _macronesia macronesia
+commence()
+{
+  export set DLDIR="$DESKTOP/pendyt"
+  tmux
+  tmux split-window -h -p 33
+  tmux split-window -p 50
+  tmux send-keys "mutt" 'C-m' I
+  tmux select-pane -t 1
+  tmux send-keys "mutt -f $HOME/Mail/PivotAccess/INBOX" 'C-m' I
+  tmux select-pane -t 0
+  tmux split-window -p 15
+  tmux send-keys "yout " 'C-l'
+  tmux select-pane -t 0
+  # tmux send-keys "cd $DLDIR" 'C-m' 'C-l' 'w3m http://rt.com/' 'C-m' 'T{U' 
+  #'C-u' 'http://gatestoneinstitute.org/' 'C-m' 'T{U' 'C-u' 
+  #'http://news.vice.com/' 'C-m'
+  tmux send-keys "cd $DLDIR" 'C-m' 'C-l' 'w3m http://rt.com/' 'C-m'
+  tmux new-window
+  tmux send-keys "cd $HACKS/workspace/poc && make begin" 'C-m'
+}
 
-export set ISSM_ROOT="/home/revence/intel/issm_2016.0.019"
-export set IAMCU_TOOLCHAIN_DIR="$ISSM_ROOT/tools/tools"
-export set DLDIR="/home/revence/Downloads"
-export set YTDIR="$DLDIR/vidfiles/yt"
-export set PATH="/home/revence/.local/bin:$ISSM_ROOT:$ISSM_ROOT/tools/compiler/bin:/home/revence/Documents/Hacks/sundry/bin:$GOROOT:$PATH"
+compdef _macronesia macronesia
