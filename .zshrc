@@ -105,7 +105,7 @@ commence()
   tmux send-keys "cd $DLDIR" 'C-m' 'C-l' 'w3m http://rt.com/' 'C-m'
   tmux new-window -c "$HACKS/fulcrum-backend" "vi -S ide.vim"
   tmux split-window -h -p 30 -c "$HACKS/fulcrum-backend"
-  tmux send-keys 'rails s' 'C-l' 'C-m'
+  tmux send-keys 'bundle install' 'C-m' 'C-l' 'rails s' 'C-l' 'C-m'
   tmux split-window -c "$HACKS/fulcrum-backend"
   tmux send-keys 'git add --all && git commit && git push' 'C-l'
   tmux new-window -c "$HACKS/workspace/poc" "vim -S .ide.vim"
