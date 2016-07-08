@@ -92,9 +92,9 @@ commence()
   tmux
   tmux split-window -h -p 33
   tmux split-window -p 50
-  tmux send-keys "mutt" 'C-m' I
+  tmux send-keys "mutt" 'C-m' # I
   tmux select-pane -t 1
-  tmux send-keys "mutt -f $HOME/Mail/PivotAccess/INBOX" 'C-m' I
+  tmux send-keys "mutt -f $HOME/Mail/PivotAccess/INBOX" 'C-m' # I
   tmux select-pane -t 0
   tmux split-window -p 15 -c "$DLDIR"
   tmux send-keys "yout " 'C-l'
