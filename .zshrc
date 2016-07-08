@@ -111,6 +111,13 @@ commence()
   tmux new-window -c "$HACKS/workspace/poc" "vim -S .ide.vim"
   tmux split-window -c "$HACKS/workspace/poc" -h -p 33
   tmux send-keys C-l "make test"
+  tmux new-window -c "$HACKS/fulcrum-pos/Code"
+  tmux send-keys C-l "vi "
+  tmux split-window -h -p 30 -c "$HACKS/fulcrum-pos/Code"
+  tmux send-keys C-l "make exe"
+  tmux new-window -c "$HACKS/sundry/egrapha.p6m" "vim -S .ide.vim"
+  tmux split-window -h -p 30 -c "$HACKS/sundry/egrapha.p6m"
+  tmux send-keys C-l "./egrapha.pl6 --scgi-port=9002 --server-config=nginx.egrapha.conf --static=static --bible-table=bible --translation=lug --max-random-verses=10 --appname=Scribe server" C-m
 
   # tmux send-keys "make begin" 'C-m'
 }
