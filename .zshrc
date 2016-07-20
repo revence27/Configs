@@ -22,6 +22,9 @@ export set IAMCU_TOOLCHAIN_DIR="$ISSM_ROOT/tools/tools"
 export set DLDIR="$HOME/Downloads"
 export set YTDIR="$DLDIR/vidfiles/yt"
 export set HACKS="$HOME/Documents/Hacks"
+export set NETWORKCONTENT="$HACKS/content"
+export set WINFILES="$NETWORKCONTENT/files"
+export set WINPROJS="$NETWORKCONTENT/windows"
 export set RAKBREW="$HOME/.rakudobrew"
 export set P6BREWS="$RAKBREW/moar-nom"
 export set P6HACKS="$HACKS/sundry/rakudo-star-2016.04"
@@ -46,6 +49,10 @@ export LANGUAGE=en_GB
 export LANG=en_GB
 export LC_TYPE=en_GB.UTF-8
 export LC_CTYPE=en_GB.UTF-8
+export IRCNICK="LeCamarade"
+export IRCUSER="LeCamarade"
+export IRCNAME="LeCamarade"
+export IRCSERVER="irc.freenode.net"
 
 alias ls='ls --color'
 alias ping='ping -a'
@@ -103,21 +110,35 @@ commence()
   #'C-u' 'http://gatestoneinstitute.org/' 'C-m' 'T{U' 'C-u' 
   #'http://news.vice.com/' 'C-m'
   tmux send-keys "cd $DLDIR" 'C-m' 'C-l' 'w3m http://rt.com/' 'C-m'
+
   tmux new-window -c "$HACKS/fulcrum-backend" "vi -S ide.vim"
   tmux split-window -h -p 30 -c "$HACKS/fulcrum-backend"
   tmux send-keys 'bundle install' 'C-m' 'C-l' 'rails s' 'C-l' 'C-m'
   tmux split-window -c "$HACKS/fulcrum-backend"
   tmux send-keys 'git add --all && git commit && git push' 'C-l'
+
   tmux new-window -c "$HACKS/workspace/poc" "vim -S .ide.vim"
   tmux split-window -c "$HACKS/workspace/poc" -h -p 33
   tmux send-keys C-l "make test"
+
   tmux new-window -c "$HACKS/fulcrum-pos/Code"
-  tmux send-keys C-l "vi "
+  tmux send-keys C-l "vi -S .ide.vim" C-m
   tmux split-window -h -p 30 -c "$HACKS/fulcrum-pos/Code"
   tmux send-keys C-l "make exe"
+
   tmux new-window -c "$HACKS/sundry/egrapha.p6m" "vim -S .ide.vim"
   tmux split-window -h -p 30 -c "$HACKS/sundry/egrapha.p6m"
   tmux send-keys C-l "./egrapha.pl6 --scgi-port=9002 --server-config=nginx.egrapha.conf --static=static --bible-table=bible --translation=lug --max-random-verses=10 --appname=Scribe server" C-m
+
+  tmux new-window -c "$HACKS/pivot-embedded" "vim -S .ide.vim"
+  tmux split-window -h -p 30 -c "$HACKS/pivot-embedded"
+  tmux send-keys C-l "make ardy-test"
+
+  tmux new-window "BitchX"
+  tmux split-window -h -p 30
+  tmux send-keys C-l "perl6" C-m
+  tmux split-window
+  tmux send-keys 'ghci' 'C-l' 'C-m'
 
   # tmux send-keys "make begin" 'C-m'
 }
