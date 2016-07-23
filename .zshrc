@@ -97,7 +97,7 @@ commence()
 {
   export set DLDIR="$DESKTOP/pendyt"
   tmux
-  tmux split-window -h -p 33
+  tmux split-window -h -p 40
   tmux split-window -p 50
   tmux send-keys "mutt" 'C-m' # I
   tmux select-pane -t 1
@@ -124,7 +124,8 @@ commence()
   tmux new-window -c "$HACKS/fulcrum-pos/Code"
   tmux send-keys C-l "vi -S .ide.vim" C-m
   tmux split-window -h -p 30 -c "$HACKS/fulcrum-pos/Code"
-  tmux send-keys C-l "make exe"
+  tmux bind-key -n F5 select-pane -t 1 \; send-keys C-c C-l "make test" C-l C-m \; select-pane -t 0 
+  tmux send-keys C-l "make bin"
 
   tmux new-window -c "$HACKS/sundry/egrapha.p6m" "vim -S .ide.vim"
   tmux split-window -h -p 30 -c "$HACKS/sundry/egrapha.p6m"
