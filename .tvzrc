@@ -4,6 +4,8 @@
 export set DLDIR="$DESKTOP/yt"
 export set WORKMAIL="$HOME/Mail/PivotAccess/INBOX"
 export set YTDL="youtube-dl"
+export set TERMBACKGROUND=dark
+echo $COLORTERM | grep gnome-terminal 2>&1 > /dev/null && export set TERMBACKGROUND=light
 
 old_mailbox_setup_routine()
 {
@@ -26,9 +28,9 @@ downloads_setup_routine()
 
 newsreader_setup_routine()
 {
-  # tmux send-keys "cd $DLDIR" 'C-m' 'C-l' 'w3m http://rt.com/' 'C-m' 'T{U' 
-  #'C-u' 'http://gatestoneinstitute.org/' 'C-m' 'T{U' 'C-u' 
-  #'http://news.vice.com/' 'C-m'
+  # tmux send-keys "cd $DLDIR" 'C-m' 'C-l' 'w3m http://rt.com/' 'C-m' 'T{U
+  #'C-u' 'http://gatestoneinstitute.org/' 'C-m' 'T{U' 'C-u'
+  #'http://news.vice.com/' 'C-m
   tmux send-keys "cd $DLDIR" 'C-m' 'C-l' 'w3m http://rt.com/' 'C-m'
   # tmux send-keys 'C-l' 'BitchX' 'C-m'
 }
@@ -40,5 +42,5 @@ workdirectories_routine()
   # echo "$HACKS/pivot/frontend/Code"
   echo "$HACKS/sundry/septuagintal"
   # echo "$HACKS/pivot-embedded"
-  echo "$HACKS/sundry/praqs" 
+  echo "$HACKS/sundry/praqs"
 }

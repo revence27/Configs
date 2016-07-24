@@ -115,6 +115,7 @@ set tabstop=2
 set nohlsearch
 set nobackup
 set bg=dark
+execute "set bg=" . $TERMBACKGROUND
 if v:progname =~? "gvim"
   set bg=light
 endif
