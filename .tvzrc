@@ -5,7 +5,7 @@ export set DLDIR="$DESKTOP/yt"
 export set WORKMAIL="$HOME/Mail/PivotAccess/INBOX"
 export set YTDL="youtube-dl"
 export set TERMBACKGROUND=dark
-echo $COLORTERM | grep gnome-terminal 2>&1 > /dev/null && export set TERMBACKGROUND=light
+echo $COLORTERM | grep xfce4-terminal 2>&1 > /dev/null && export set TERMBACKGROUND=light
 
 old_mailbox_setup_routine()
 {
