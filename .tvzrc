@@ -35,9 +35,9 @@ newsreader_setup_routine()
 
 workdirectories_routine()
 {
-  echo "$HACKS/pivot/backend"
+  # echo "$HACKS/pivot/backend"
   # echo "$HACKS/workspace/poc"
-  echo "$HACKS/pivot/frontend/Code"
+  # echo "$HACKS/pivot/frontend/Code"
   echo "$HACKS/sundry/septuagintal"
   # echo "$HACKS/pivot-embedded"
   echo "$HACKS/sundry/praqs" 
