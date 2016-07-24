@@ -1,0 +1,44 @@
+# vim: syntax=zsh
+
+# export set DLDIR="$DESKTOP/pendyt"
+export set DLDIR="$DESKTOP/yt"
+export set WORKMAIL="$HOME/Mail/PivotAccess/INBOX"
+export set YTDL="youtube-dl"
+
+old_mailbox_setup_routine()
+{
+  tmux split-window -p 50
+  tmux send-keys "mutt" 'C-m' # I
+  tmux select-pane -t 1
+  tmux send-keys "mutt -f $HOME/Mail/PivotAccess/INBOX" 'C-m' # I
+}
+
+mailbox_setup_routine()
+{
+  tmux send-keys "mutt" 'C-m' I
+}
+
+downloads_setup_routine()
+{
+  tmux split-window -p 15 -c "$DLDIR"
+  tmux send-keys "$YTDL " 'C-l'
+}
+
+newsreader_setup_routine()
+{
+  # tmux send-keys "cd $DLDIR" 'C-m' 'C-l' 'w3m http://rt.com/' 'C-m' 'T{U' 
+  #'C-u' 'http://gatestoneinstitute.org/' 'C-m' 'T{U' 'C-u' 
+  #'http://news.vice.com/' 'C-m'
+  tmux send-keys "cd $DLDIR" 'C-m' 'C-l' 'w3m http://rt.com/' 'C-m'
+  # tmux send-keys 'C-l' 'BitchX' 'C-m'
+}
+
+workdirectories_routine()
+{
+  echo "$HACKS/pivot/backend"
+  # echo "$HACKS/workspace/poc"
+  echo "$HACKS/pivot/frontend/Code"
+  echo "$HACKS/sundry/septuagintal"
+  # echo "$HACKS/pivot-embedded"
+  echo "$HACKS/sundry/praqs" 
+}

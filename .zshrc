@@ -93,55 +93,35 @@ _macronesia()
   _describe 'values' options
 }
 
+session_expansion_routine()
+{
+  # tmux bind-key -n F5 select-pane -t 1 \; send-keys C-c C-l "make test" C-l C-m \; select-pane -t 0
+  # tmux bind-key -n F6 select-pane -t 1 \; send-keys C-c C-l "make install" C-l C-m \; select-pane -t 0
+
+  for wd in `workdirectories_routine`
+  do
+    source ${wd}/.tmuxrc
+    init_tmux_windows ${wd}
+  done
+}
+
+TVZRC=~/.tvzrc
+test -f $TVZRC && source $TVZRC
+
 commence()
 {
-  export set DLDIR="$DESKTOP/pendyt"
-  tmux
+  cd ~
+  # tmux
+  # tmux new-session -AD -n Basic
+  tmux new-session -AD -n Basic
   tmux split-window -h -p 40
-  tmux split-window -p 50
-  tmux send-keys "mutt" 'C-m' # I
-  tmux select-pane -t 1
-  tmux send-keys "mutt -f $HOME/Mail/PivotAccess/INBOX" 'C-m' # I
-  tmux select-pane -t 0
-  tmux split-window -p 15 -c "$DLDIR"
-  tmux send-keys "yout " 'C-l'
-  tmux select-pane -t 0
-  # tmux send-keys "cd $DLDIR" 'C-m' 'C-l' 'w3m http://rt.com/' 'C-m' 'T{U' 
-  #'C-u' 'http://gatestoneinstitute.org/' 'C-m' 'T{U' 'C-u' 
-  #'http://news.vice.com/' 'C-m'
-  tmux send-keys "cd $DLDIR" 'C-m' 'C-l' 'w3m http://rt.com/' 'C-m'
+  for sr in mailbox_setup_routine downloads_setup_routine newsreader_setup_routine
+  do
+    ${sr}
+    tmux select-pane -t 0
+  done
 
-  tmux new-window -c "$HACKS/fulcrum-backend" "vi -S ide.vim"
-  tmux split-window -h -p 30 -c "$HACKS/fulcrum-backend"
-  tmux send-keys 'bundle install' 'C-m' 'C-l' 'rails s' 'C-l' 'C-m'
-  tmux split-window -c "$HACKS/fulcrum-backend"
-  tmux send-keys 'git add --all && git commit && git push' 'C-l'
-
-  tmux new-window -c "$HACKS/workspace/poc" "vim -S .ide.vim"
-  tmux split-window -c "$HACKS/workspace/poc" -h -p 33
-  tmux send-keys C-l "make test"
-
-  tmux new-window -c "$HACKS/fulcrum-pos/Code"
-  tmux send-keys C-l "vi -S .ide.vim" C-m
-  tmux split-window -h -p 30 -c "$HACKS/fulcrum-pos/Code"
-  tmux bind-key -n F5 select-pane -t 1 \; send-keys C-c C-l "make test" C-l C-m \; select-pane -t 0 
-  tmux send-keys C-l "make bin"
-
-  tmux new-window -c "$HACKS/sundry/egrapha.p6m" "vim -S .ide.vim"
-  tmux split-window -h -p 30 -c "$HACKS/sundry/egrapha.p6m"
-  tmux send-keys C-l "./egrapha.pl6 --scgi-port=9002 --server-config=nginx.egrapha.conf --static=static --bible-table=bible --translation=lug --max-random-verses=10 --appname=Scribe server" C-m
-
-  tmux new-window -c "$HACKS/pivot-embedded" "vim -S .ide.vim"
-  tmux split-window -h -p 30 -c "$HACKS/pivot-embedded"
-  tmux send-keys C-l "make ardy-test"
-
-  tmux new-window "BitchX"
-  tmux split-window -h -p 30
-  tmux send-keys C-l "perl6" C-m
-  tmux split-window
-  tmux send-keys 'ghci' 'C-l' 'C-m'
-
-  # tmux send-keys "make begin" 'C-m'
+  session_expansion_routine
 }
 
 compdef _macronesia macronesia
