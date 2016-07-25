@@ -10,9 +10,12 @@ endif
 set shortmess=aoO
 badd +47 .zshrc
 badd +1 ~/Documents/Hacks/sundry/praqs/.tmuxrc
-badd +1 ~/Documents/Hacks/sundry/septuagintal/.tmuxrc
-badd +3 ~/Documents/Hacks/pivot/frontend/.tmuxrc
-badd +10 ~/Documents/Hacks/pivot/backend/.tmuxrc
+" badd +1 ~/Documents/Hacks/sundry/septuagintal/.tmuxrc
+execute "badd +1 " . $PUBWORKDIR . "/.tmuxrc"
+" badd +3 ~/Documents/Hacks/pivot/frontend/.tmuxrc
+execute "badd +3 " . $EMBWORKDIR . "/.tmuxrc"
+" badd +10 ~/Documents/Hacks/pivot/backend/.tmuxrc
+execute "badd +10 " . $WEBWORKDIR . "/.tmuxrc"
 badd +1 .tvzrc
 badd +0 ~/.vimrc
 args .zshrc
@@ -127,7 +130,8 @@ normal! zt
 normal! 0
 wincmd w
 argglobal
-edit ~/Documents/Hacks/pivot/frontend/.tmuxrc
+" edit ~/Documents/Hacks/pivot/frontend/.tmuxrc
+execute "edit " . $EMBWORKDIR . "/.tmuxrc"
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
