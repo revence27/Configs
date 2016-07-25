@@ -108,12 +108,24 @@ session_expansion_routine()
 TVZRC=~/.tvzrc
 test -f $TVZRC && source $TVZRC
 
+unbind_all_keys()
+{
+  for key in F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 F15
+  do
+    tmux unbind-key -n ${key}
+  done
+}
+
 commence()
 {
   cd ~
+  # unbind_all_keys
   # tmux
   # tmux new-session -AD -n Basic
-  tmux new-session -AD -n Basic
+  tmux bind-key -n F5 select-pane -t 1 \; send-keys C-c C-l "make test" C-m \; select-pane -t 0
+  tmux bind-key -n F6 select-pane -t 1 \; send-keys C-c C-l "make install" C-m \; select-pane -t 0
+  tmux bind-key -n F7 select-pane -t 1 \; send-keys C-c C-l "make publish" C-m \; select-pane -t 0
+  tmux bind-key -n F8 select-pane -t 1 \; send-keys C-c C-l "make clean" C-m \; select-pane -t 0
   tmux split-window -h -p 40
   for sr in mailbox_setup_routine downloads_setup_routine newsreader_setup_routine
   do

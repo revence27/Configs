@@ -68,7 +68,8 @@ normal! 0
 wincmd w
 exe 'vert 1resize ' . ((&columns * 68 + 68) / 136)
 exe 'vert 2resize ' . ((&columns * 67 + 68) / 136)
-tabedit ~/Documents/Hacks/pivot/backend/.tmuxrc
+" tabedit ~/Documents/Hacks/pivot/backend/.tmuxrc
+execute "tabedit " . $WEBWORKDIR . "/.tmuxrc"
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
@@ -112,7 +113,8 @@ normal! zt
 normal! 0
 wincmd w
 argglobal
-edit ~/Documents/Hacks/sundry/septuagintal/.tmuxrc
+" edit ~/Documents/Hacks/sundry/septuagintal/.tmuxrc
+execute "edit " . $PUBWORKDIR . "/.tmuxrc"
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}

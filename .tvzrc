@@ -13,17 +13,12 @@ export set WEBWORKDIR="$HACKS/fulcrum-backend"
 export set PUBWORKDIR="$HACKS/sundry/septuagintal"
 export set PUBWORKDIR="$HACKS/sundry/egrapha.p6m"
 
-old_mailbox_setup_routine()
+mailbox_setup_routine()
 {
   tmux split-window -p 50
   tmux send-keys "mutt" 'C-m' # I
   tmux select-pane -t 1
   tmux send-keys "mutt -f $HOME/Mail/PivotAccess/INBOX" 'C-m' # I
-}
-
-mailbox_setup_routine()
-{
-  tmux send-keys "mutt" 'C-m' I
 }
 
 downloads_setup_routine()
