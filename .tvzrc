@@ -1,24 +1,23 @@
 # vim: syntax=zsh
 
-export set DLDIR="$DESKTOP/pendyt"
+# export set DLDIR="$DESKTOP/pendyt"
+export set DLDIR="$DESKTOP/yt"
 export set WORKMAIL="$HOME/Mail/PivotAccess/INBOX"
-export set YTDL="yout"
+export set YTDL="youtube-dl"
 export set TERMBACKGROUND=dark
-echo $COLORTERM | grep gnome-terminal 2>&1 > /dev/null && export set TERMBACKGROUND=light
+echo $COLORTERM | grep xfce4-terminal 2>&1 > /dev/null && export set TERMBACKGROUND=light
 
-export set EMBWORKDIR="$HACKS/pivot/frontend"
-export set EMBWORKDIR="$HACKS/fulcrum-pos"
-export set WEBWORKDIR="$HACKS/pivot/backend"
-export set WEBWORKDIR="$HACKS/fulcrum-backend"
-export set PUBWORKDIR="$HACKS/sundry/septuagintal"
-export set PUBWORKDIR="$HACKS/sundry/egrapha.p6m"
-
-mailbox_setup_routine()
+old_mailbox_setup_routine()
 {
   tmux split-window -p 50
   tmux send-keys "mutt" 'C-m' # I
   tmux select-pane -t 1
   tmux send-keys "mutt -f $HOME/Mail/PivotAccess/INBOX" 'C-m' # I
+}
+
+mailbox_setup_routine()
+{
+  tmux send-keys "mutt" 'C-m' I
 }
 
 downloads_setup_routine()
@@ -38,10 +37,10 @@ newsreader_setup_routine()
 
 workdirectories_routine()
 {
-  echo "$HACKS/fulcrum-backend"
-  echo "$HACKS/workspace/poc"
-  echo "$EMBWORKDIR/Code"
-  # echo "$HACKS/sundry/egrapha.p6m"
-  echo "$HACKS/pivot-embedded"
+  # echo "$HACKS/pivot/backend"
+  # echo "$HACKS/workspace/poc"
+  # echo "$HACKS/pivot/frontend/Code"
+  echo "$HACKS/sundry/septuagintal"
+  # echo "$HACKS/pivot-embedded"
   # echo "$HACKS/sundry/praqs"
 }
