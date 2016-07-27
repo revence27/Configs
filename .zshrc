@@ -152,6 +152,8 @@ misc_tmux_options()
 
 tmux_desktop_environment()
 {
+  tmux rename-session $DESKTOPSESSIONNAME
+  tmux rename-window 'Desktop'
   tmux split-window -h -p 40
   for sr in mailbox_setup_routine downloads_setup_routine newsreader_setup_routine
   do

@@ -13,6 +13,8 @@ export set WEBWORKDIR="$HACKS/fulcrum-backend"
 export set PUBWORKDIR="$HACKS/sundry/septuagintal"
 export set PUBWORKDIR="$HACKS/sundry/egrapha.p6m"
 
+export set DESKTOPSESSIONNAME=worksess
+
 mailbox_setup_routine()
 {
   tmux split-window -p 50
