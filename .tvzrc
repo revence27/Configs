@@ -1,7 +1,6 @@
 # vim: syntax=zsh
 
 export set DLDIR="$DESKTOP/yt"
-export set WORKMAIL="$HOME/Mail/PivotAccess/INBOX"
 export set YTDL="youtube-dl"
 export set TERMBACKGROUND=dark
 echo $COLORTERM | grep xfce4-terminal 2>&1 > /dev/null && export set TERMBACKGROUND=light
@@ -10,18 +9,18 @@ export set DESKTOPSESSIONNAME=worksess
 
 mailbox_setup_routine()
 {
-  tmux send-keys "mutt" 'C-m' I
+  tmux send-keys "mutt" C-m I
 }
 
 downloads_setup_routine()
 {
   tmux split-window -p 15 -c "$DLDIR"
-  tmux send-keys "$YTDL " 'C-l'
+  tmux send-keys "$YTDL " C-l
 }
 
 newsreader_setup_routine()
 {
-  tmux send-keys 'C-l' 'BitchX' 'C-m'
+  tmux send-keys C-l 'BitchX' C-m
 }
 
 workdirectories_routine()

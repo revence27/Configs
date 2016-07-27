@@ -58,12 +58,10 @@ alias ls='ls --color'
 alias ping='ping -a'
 alias sml='rlwrap sml'
 alias ocaml='rlwrap ocaml'
-alias yout='youloader --dest=/home/revence/Desktop/pendyt --pause=60'
+alias yout=youtube-dl
 alias youtube-dl='youtube-dl --write-sub --sub-lang en,fr --no-part -o "%(title)s-%(format)s-%(id)s.%(ext)s" --no-playlist -fbest'
 alias yautube-dl='/usr/bin/youtube-dl --no-part -A -xk --audio-format mp3 --audio-quality 0 -fbest'
 alias wget='wget -Sc'
-# alias ssu='sudo su ; exit'
-# alias ssu="tmux split-window 'sudo su ; exit'"
 alias pivotapp="ssh -t pivotweb 'ssh -t apps env LD_LIBRARY_PATH=/usr/local/lib:/lib:/usr/lib tmux attach'"
 alias mpg123='mpg123 -C'
 alias guile='rlwrap guile'
@@ -95,9 +93,6 @@ _macronesia()
 
 session_expansion_routine()
 {
-  # tmux bind-key -n F5 select-pane -t 1 \; send-keys C-c C-l "make test" C-l C-m \; select-pane -t 0
-  # tmux bind-key -n F6 select-pane -t 1 \; send-keys C-c C-l "make install" C-l C-m \; select-pane -t 0
-
   for wd in `workdirectories_routine`
   do
     source ${wd}/.tmuxrc
