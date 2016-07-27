@@ -13,3 +13,6 @@ llatsni: ~/.zshrc ~/.vimrc ~/.tvzrc ~/.ide.vim ~/.bitchxrc
 	cp ~/.tvzrc .tvzrc
 	cp ~/.ide.vim .ide.vim
 	cp ~/.bitchxrc .bitchxrc
+
+publish:
+	git add --all && git commit && git push -u

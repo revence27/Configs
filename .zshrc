@@ -108,32 +108,72 @@ session_expansion_routine()
 TVZRC=~/.tvzrc
 test -f $TVZRC && source $TVZRC
 
-unbind_all_keys()
+rebind_tmux_keys()
 {
-  for key in F1 F2 F3 F4 F5 F6 F7 F8 F9 F10 F11 F12 F13 F14 F15
-  do
-    tmux unbind-key -n ${key}
-  done
+  tmux bind-key -n S-Left   previous-window
+  tmux bind-key -n S-Right  next-window
+  tmux bind-key -n M-Right  select-pane -R
+  tmux bind-key -n M-Left   select-pane -L
+  tmux bind-key -n M-Up     select-pane -U
+  tmux bind-key -n M-Down   select-pane -D
+  tmux bind-key -n C-PgDn   send-keys -t 0 gt
+  tmux bind-key -n C-PgUp   send-keys -t 0 gT
+  tmux bind-key -n C-s      send-keys -t 0 Escape Escape ':w' C-m Escape a
+  tmux bind-key -n S-F4     send-keys -t 0 Escape Escape ':x' C-m C-l C-d
+  tmux bind-key -n F4       send-keys -t 0 Escape Escape ':xa' C-m C-l C-d
+  tmux bind-key -n F5       send-keys -t 1 C-c C-l "make test" C-m
+  tmux bind-key -n F6       send-keys -t 1 C-c C-l "make install" C-m
+  tmux bind-key -n F7       send-keys -t 1 C-c C-l "make publish" C-m
+  tmux bind-key -n F8       send-keys -t 1 C-c C-l "make clean" C-m
+  tmux bind-key -n F9       send-keys -t 1 C-c C-l "make publish" C-m
 }
 
-commence()
+misc_tmux_options()
 {
-  cd ~
-  # unbind_all_keys
-  # tmux
-  # tmux new-session -AD -n Basic
-  tmux bind-key -n F5 select-pane -t 1 \; send-keys C-c C-l "make test" C-m \; select-pane -t 0
-  tmux bind-key -n F6 select-pane -t 1 \; send-keys C-c C-l "make install" C-m \; select-pane -t 0
-  tmux bind-key -n F7 select-pane -t 1 \; send-keys C-c C-l "make publish" C-m \; select-pane -t 0
-  tmux bind-key -n F8 select-pane -t 1 \; send-keys C-c C-l "make clean" C-m \; select-pane -t 0
+  # tmux set-option         -sg escape-time 0
+  tmux set-option         -g status-keys vi
+  tmux set-option         -g history-limit 10000
+  tmux set-window-option  -g automatic-rename on
+  # tmux set-option         -g set-titles on
+  tmux set-option         -g status-bg green
+  tmux set-option         -g status-fg black
+  tmux set-option         -g window-status-current-bg white
+  tmux set-option         -g window-status-current-fg black
+  tmux set-option         -g window-status-current-attr bold
+  tmux set-option         -g status-interval 60
+  tmux set-option         -g status-left-length 30
+  tmux set-option         -g status-right-length 60
+  tmux set-option         -g status-left '#[fg=black][#S]#[default]' ##[fg=white]#(cut -d " " -f 1-3 /proc/loadavg)'
+  tmux set-option         -g status-right '#[fg=yellow]%H:%M#[default] #[fg=white]#(whoami)@#H#[default] #[fg=yellow]%A, %d %B, %Y#[default]'
+  tmux setw               -g mode-keys vi
+  tmux setw               -g mode-mouse on
+  tmux setw               -g monitor-activity on
+}
+
+tmux_desktop_environment()
+{
   tmux split-window -h -p 40
   for sr in mailbox_setup_routine downloads_setup_routine newsreader_setup_routine
   do
     ${sr}
     tmux select-pane -t 0
   done
+}
 
+start_tmux_desktop()
+{
+  tmux_desktop_environment
   session_expansion_routine
+}
+
+commence()
+{
+  cd ~
+  # tmux
+  # tmux new-session -AD -n Basic
+  rebind_tmux_keys
+  misc_tmux_options
+  start_tmux_desktop
 }
 
 compdef _macronesia macronesia
