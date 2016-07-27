@@ -1,6 +1,5 @@
 # vim: syntax=zsh
 
-# export set DLDIR="$DESKTOP/pendyt"
 export set DLDIR="$DESKTOP/yt"
 export set WORKMAIL="$HOME/Mail/PivotAccess/INBOX"
 export set YTDL="youtube-dl"
@@ -22,10 +21,6 @@ downloads_setup_routine()
 
 newsreader_setup_routine()
 {
-  # tmux send-keys "cd $DLDIR" 'C-m' 'C-l' 'w3m http://rt.com/' 'C-m' 'T{U
-  #'C-u' 'http://gatestoneinstitute.org/' 'C-m' 'T{U' 'C-u'
-  #'http://news.vice.com/' 'C-m
-  # tmux send-keys "cd $DLDIR" 'C-m' 'C-l' 'w3m http://rt.com/' 'C-m'
   tmux send-keys 'C-l' 'BitchX' 'C-m'
 }
 
