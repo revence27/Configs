@@ -1,4 +1,4 @@
-install: .zshrc .vimrc .tvzrc .ide.vim .bitchxrc
+install: .zshrc .vimrc .tvzrc .ide.vim .bitchxrc .w3m/keymap
 	git checkout `hostname`
 	cp .zshrc ~/.zshrc
 	cp .vimrc ~/.vimrc
@@ -6,7 +6,7 @@ install: .zshrc .vimrc .tvzrc .ide.vim .bitchxrc
 	cp .ide.vim ~/.ide.vim
 	cp .bitchxrc ~/.bitchxrc
 
-llatsni: ~/.zshrc ~/.vimrc ~/.tvzrc ~/.ide.vim ~/.bitchxrc
+llatsni: ~/.zshrc ~/.vimrc ~/.tvzrc ~/.ide.vim ~/.bitchxrc ~/.w3m/keymap
 	git checkout `hostname`
 	cp ~/.zshrc .zshrc
 	cp ~/.vimrc .vimrc
