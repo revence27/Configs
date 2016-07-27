@@ -110,22 +110,27 @@ test -f $TVZRC && source $TVZRC
 
 rebind_tmux_keys()
 {
-  tmux bind-key -n S-Left   previous-window
-  tmux bind-key -n S-Right  next-window
-  tmux bind-key -n M-Right  select-pane -R
-  tmux bind-key -n M-Left   select-pane -L
-  tmux bind-key -n M-Up     select-pane -U
-  tmux bind-key -n M-Down   select-pane -D
-  tmux bind-key -n C-PgDn   send-keys -t 0 gt
-  tmux bind-key -n C-PgUp   send-keys -t 0 gT
-  tmux bind-key -n C-s      send-keys -t 0 Escape Escape ':w' C-m Escape a
-  tmux bind-key -n S-F4     send-keys -t 0 Escape Escape ':x' C-m C-l C-d
-  tmux bind-key -n F4       send-keys -t 0 Escape Escape ':xa' C-m C-l C-d
-  tmux bind-key -n F5       send-keys -t 1 C-c C-l "make test" C-m
-  tmux bind-key -n F6       send-keys -t 1 C-c C-l "make install" C-m
-  tmux bind-key -n F7       send-keys -t 1 C-c C-l "make publish" C-m
-  tmux bind-key -n F8       send-keys -t 1 C-c C-l "make clean" C-m
-  tmux bind-key -n F9       send-keys -t 1 C-c C-l "make publish" C-m
+  tmux bind-key -n S-Left     previous-window
+  tmux bind-key -n S-Right    next-window
+  tmux bind-key -n S-M-Right  select-pane -R
+  tmux bind-key -n S-M-Left   select-pane -L
+  tmux bind-key -n S-M-Up     select-pane -U
+  tmux bind-key -n S-M-Down   select-pane -D
+  tmux bind-key -n M-Right    send-keys      Escape C-w Right
+  tmux bind-key -n M-Left     send-keys      Escape C-w Left
+  tmux bind-key -n M-Down     send-keys      Escape C-w Down
+  tmux bind-key -n M-Up       send-keys      Escape C-w Up
+  # tmux bind-key -n C-r        send-keys      Escape C-c C-l Up C-m
+  tmux bind-key -n C-PgDn     send-keys -t 0 gt
+  tmux bind-key -n C-PgUp     send-keys -t 0 gT
+  tmux bind-key -n C-s        send-keys -t 0 Escape Escape ':w' C-m Escape a
+  tmux bind-key -n S-F4       send-keys -t 0 Escape Escape ':x' C-m C-l C-d
+  tmux bind-key -n F4         send-keys -t 0 Escape Escape ':xa' C-m C-l C-d
+  tmux bind-key -n F5         send-keys -t 1 C-c C-l "make test" C-m
+  tmux bind-key -n F6         send-keys -t 1 C-c C-l "make install" C-m
+  tmux bind-key -n F7         send-keys -t 1 C-c C-l "make publish" C-m
+  tmux bind-key -n F8         send-keys -t 1 C-c C-l "make clean" C-m
+  tmux bind-key -n F9         send-keys -t 1 C-c C-l "make publish" C-m
 }
 
 misc_tmux_options()
