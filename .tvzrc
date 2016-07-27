@@ -7,14 +7,6 @@ export set YTDL="youtube-dl"
 export set TERMBACKGROUND=dark
 echo $COLORTERM | grep xfce4-terminal 2>&1 > /dev/null && export set TERMBACKGROUND=light
 
-old_mailbox_setup_routine()
-{
-  tmux split-window -p 50
-  tmux send-keys "mutt" 'C-m' # I
-  tmux select-pane -t 1
-  tmux send-keys "mutt -f $HOME/Mail/PivotAccess/INBOX" 'C-m' # I
-}
-
 mailbox_setup_routine()
 {
   tmux send-keys "mutt" 'C-m' I
@@ -37,10 +29,5 @@ newsreader_setup_routine()
 
 workdirectories_routine()
 {
-  # echo "$HACKS/pivot/backend"
-  # echo "$HACKS/workspace/poc"
-  # echo "$HACKS/pivot/frontend/Code"
   echo "$HACKS/sundry/septuagintal"
-  # echo "$HACKS/pivot-embedded"
-  # echo "$HACKS/sundry/praqs"
 }
