@@ -133,21 +133,21 @@ misc_tmux_options()
   # tmux set-option         -sg escape-time 0
   # tmux setw               -g mode-mouse on
   # tmux setw               -g monitor-activity on
-  tmux setw               -g mode-keys vi
-  tmux set-option         -g status-keys vi
-  tmux set-option         -g history-limit 10000
-  tmux set-window-option  -g automatic-rename on
+  tmux setw               -gq mode-keys vi
+  tmux set-option         -gq status-keys vi
+  tmux set-option         -gq history-limit 10000
+  tmux set-window-option  -gq automatic-rename on
   # tmux set-option         -g set-titles on
-  tmux set-option         -g status-bg green
-  tmux set-option         -g status-fg black
-  tmux set-option         -g window-status-current-bg white
-  tmux set-option         -g window-status-current-fg black
-  tmux set-option         -g window-status-current-attr bold
-  tmux set-option         -g status-interval 60
-  tmux set-option         -g status-left-length 30
-  tmux set-option         -g status-right-length 60
-  tmux set-option         -g status-left '#[fg=black][#S]#[default]' ##[fg=white]#(cut -d " " -f 1-3 /proc/loadavg)'
-  tmux set-option         -g status-right '#[fg=yellow]%H:%M#[default] #[fg=white]#(whoami)@#H#[default] #[fg=yellow]%A, %d %B, %Y#[default]'
+  tmux set-option         -gq status-bg green
+  tmux set-option         -gq status-fg black
+  tmux set-option         -gq window-status-current-bg white
+  tmux set-option         -gq window-status-current-fg black
+  tmux set-option         -gq window-status-current-attr bold
+  tmux set-option         -gq status-interval 60
+  tmux set-option         -gq status-left-length 30
+  tmux set-option         -gq status-right-length 60
+  tmux set-option         -gq status-left '#[fg=black][#S]#[default]' ##[fg=white]#(cut -d " " -f 1-3 /proc/loadavg)'
+  tmux set-option         -gq status-right '#[fg=yellow]%H:%M#[default] #[fg=white]#(whoami)@#H#[default] #[fg=yellow]%A, %d %B, %Y#[default]'
 }
 
 tmux_desktop_environment()
