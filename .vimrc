@@ -110,6 +110,9 @@ execute pathogen#infect()
 syntax enable
 filetype plugin indent on
 
+map <C-PageUp>    :tabprev<cr>
+map <C-PageDown>  :tabnext<cr>
+
 set autoindent
 set tabstop=2
 set nohlsearch
