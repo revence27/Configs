@@ -8,6 +8,7 @@ echo $COLORTERM | grep gnome-terminal 2>&1 > /dev/null && export set TERMBACKGRO
 export set DESKTOPSESSIONNAME=worksess
 export set WORKMAILDIR="$HOME/Mail/PivotAccess"
 export set DFTMAILDIR="$HOME/Mail/Default"
+export set EMBWORKDIR="$HOME/fulcrum-pos"
 
 mailbox_setup_routine()
 {
@@ -24,7 +25,7 @@ newsreader_setup_routine()
 workdirectories_routine()
 {
   echo "$HACKS/fulcrum-backend"
-  echo "$HACKS/fulcrum-pos"
+  echo $EMBWORKDIR
   echo "$HACKS/pivot-embedded"
   echo "$HACKS/workspace/poc"
 }
