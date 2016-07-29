@@ -1,7 +1,7 @@
 # vim: syntax=zsh
 
 export set DLDIR="$DESKTOP/pendyt"
-export set YTDL="yout "
+export set YTDL="yout"
 export set TERMBACKGROUND=dark
 echo $COLORTERM | grep gnome-terminal 2>&1 > /dev/null && export set TERMBACKGROUND=light
 
@@ -9,6 +9,8 @@ export set DESKTOPSESSIONNAME=worksess
 export set WORKMAILDIR="$HOME/Mail/PivotAccess"
 export set DFTMAILDIR="$HOME/Mail/Default"
 export set EMBWORKDIR="$HACKS/fulcrum-pos"
+
+alias yout=youloader
 
 mailbox_setup_routine()
 {
