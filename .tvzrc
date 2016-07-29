@@ -1,21 +1,19 @@
 # vim: syntax=zsh
 
-export set DLDIR="$DESKTOP/yt"
-export set YTDL="youtube-dl"
+export set DLDIR="$DESKTOP/pendyt"
+export set YTDL="yout "
 export set TERMBACKGROUND=dark
 echo $COLORTERM | grep xfce4-terminal 2>&1 > /dev/null && export set TERMBACKGROUND=light
 
 export set DESKTOPSESSIONNAME=worksess
+export set WORKMAILDIR="$HOME/Mail/PivotAccess"
+export set DFTMAILDIR="$HOME/Mail/Default"
 
 mailbox_setup_routine()
 {
-  tmux send-keys "mutt" C-m I
-}
-
-downloads_setup_routine()
-{
-  tmux split-window -p 15 -c "$DLDIR"
-  tmux send-keys "$YTDL " C-l
+  tmux send-keys "mutt -f $WORKMAILDIR/INBOX" C-m I
+  tmux split-window -p 50
+  tmux send-keys "mutt -f $DFTMAILDIR/Inbox" C-m I
 }
 
 newsreader_setup_routine()
@@ -25,5 +23,8 @@ newsreader_setup_routine()
 
 workdirectories_routine()
 {
-  echo "$HACKS/sundry/septuagintal"
+  echo "$HACKS/fulcrum-backend"
+  echo "$HACKS/fulcrum-pos"
+  echo "$HACKS/pivot-embedded"
+  echo "$HACKS/workspace/poc"
 }

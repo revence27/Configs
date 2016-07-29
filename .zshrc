@@ -122,6 +122,7 @@ rebind_tmux_keys()
   tmux bind-key -n S-F4       send-keys -t 0 Escape Escape ':x' C-m C-l C-d
   tmux bind-key -n F4         send-keys -t 0 Escape Escape ':xa' C-m C-l C-d
   tmux bind-key -n F5         send-keys -t 1 C-c C-l "make test" C-m
+  tmux bind-key -n S-F5       send-keys "vi -S .ide.vim" C-m
   tmux bind-key -n F6         send-keys -t 1 C-c C-l "make install" C-m
   tmux bind-key -n F7         send-keys -t 1 C-c C-l "make publish" C-m
   tmux bind-key -n F8         send-keys -t 1 C-c C-l "make clean" C-m
@@ -133,8 +134,8 @@ misc_tmux_options()
   # tmux set-option         -sg escape-time 0
   # tmux setw               -g mode-mouse on
   # tmux setw               -g monitor-activity on
-  tmux setw               -gq mode-keys vi
-  tmux set-option         -gq status-keys vi
+  # tmux setw               -gq mode-keys vi
+  # tmux set-option         -gq status-keys vi
   tmux set-option         -gq history-limit 10000
   tmux set-window-option  -gq automatic-rename on
   # tmux set-option         -g set-titles on
@@ -166,6 +167,12 @@ start_tmux_desktop()
 {
   tmux_desktop_environment
   session_expansion_routine
+}
+
+downloads_setup_routine()
+{
+  tmux split-window -p 15 -c "$DLDIR"
+  tmux send-keys "$YTDL " C-l
 }
 
 commence()
