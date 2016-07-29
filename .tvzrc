@@ -3,7 +3,7 @@
 export set DLDIR="$DESKTOP/pendyt"
 export set YTDL="yout "
 export set TERMBACKGROUND=dark
-echo $COLORTERM | grep xfce4-terminal 2>&1 > /dev/null && export set TERMBACKGROUND=light
+echo $COLORTERM | grep gnome-terminal 2>&1 > /dev/null && export set TERMBACKGROUND=light
 
 export set DESKTOPSESSIONNAME=worksess
 export set WORKMAILDIR="$HOME/Mail/PivotAccess"
