@@ -2,21 +2,21 @@
 
 export set DLDIR="$DESKTOP/pendyt"
 export set YTDL="yout"
-export set TERMBACKGROUND=dark
-echo $COLORTERM | grep gnome-terminal 2>&1 > /dev/null && export set TERMBACKGROUND=light
+export set TERMBACKGROUND=light
+echo $COLORTERM | grep xfce4-terminal 2>&1 > /dev/null && export set TERMBACKGROUND=dark
 
 export set DESKTOPSESSIONNAME=worksess
 export set WORKMAILDIR="$HOME/Mail/PivotAccess"
 export set DFTMAILDIR="$HOME/Mail/Default"
 export set EMBWORKDIR="$HACKS/fulcrum-pos"
 
-alias yout=youloader
+alias yout='youloader --pause=60'
 
 mailbox_setup_routine()
 {
-  tmux send-keys "mutt -f $WORKMAILDIR/INBOX" C-m I
-  tmux split-window -p 50
-  tmux send-keys "mutt -f $DFTMAILDIR/Inbox" C-m I
+  tmux send-keys -t 'Desktop.1' "mutt -f $WORKMAILDIR/INBOX" C-m I
+  tmux split-window -t 'Desktop.1' -p 50
+  tmux send-keys -t 'Desktop.2' "mutt -f $DFTMAILDIR/Inbox" C-m I
 }
 
 newsreader_setup_routine()

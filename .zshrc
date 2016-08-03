@@ -17,11 +17,13 @@ ZSH_THEME="robbyrussell"
 plugins=(git rails ruby)
 
 # User configuration
-export set ISSM_ROOT="$HOME/intel/issm_2016.0.019"
-export set IAMCU_TOOLCHAIN_DIR="$ISSM_ROOT/tools/tools"
 export set DLDIR="$HOME/Downloads"
 export set YTDIR="$DLDIR/vidfiles/yt"
 export set HACKS="$HOME/Documents/Hacks"
+export set QMSI_ROOT="$HACKS/qmsi"
+export set ISSM_ROOT="$HACKS/issm-lx"
+export set IAMCU_TOOLCHAIN_DIR="$ISSM_ROOT/tools/compiler/gcc-ia/5.2.1/bin"
+export set ARCMCU_TOOLCHAIN_DIR="$ISSM_ROOT/tools/compiler/gcc-arc/4.8.5/bin"
 export set NETWORKCONTENT="$HACKS/content"
 export set WINFILES="$NETWORKCONTENT/files"
 export set WINPROJS="$NETWORKCONTENT/windows"
@@ -49,6 +51,13 @@ export LANGUAGE=en_GB
 export LANG=en_GB
 export LC_TYPE=en_GB.UTF-8
 export LC_CTYPE=en_GB.UTF-8
+export LC_TIME=en_GB
+export LC_PAPER=en_GB
+export LC_NUMERIC=en_GB
+export LC_MONETARY=en_UG
+export LC_MEASUREMENT=en_GB
+export LC_IDENTIFICATION=en_UG
+export LC_ADDRESS=rw_RW
 export IRCNICK="LeCamarade"
 export IRCUSER="LeCamarade"
 export IRCNAME="LeCamarade"
@@ -152,13 +161,13 @@ misc_tmux_options()
 
 tmux_desktop_environment()
 {
-  tmux rename-session $DESKTOPSESSIONNAME
+  # tmux rename-session $DESKTOPSESSIONNAME
   tmux rename-window 'Desktop'
-  tmux split-window -h -p 40
+  tmux split-window -t 'Desktop.0' -h -p 40
   for sr in mailbox_setup_routine downloads_setup_routine newsreader_setup_routine
   do
     ${sr}
-    tmux select-pane -t 0
+    tmux select-pane -l
   done
 }
 
@@ -170,8 +179,8 @@ start_tmux_desktop()
 
 downloads_setup_routine()
 {
-  tmux split-window -p 15 -c "$DLDIR"
-  tmux send-keys "$YTDL " C-l
+  tmux split-window -t 'Desktop.0' -p 15 -c "$DLDIR"
+  tmux send-keys -t 'Desktop.1' "$YTDL " C-l
 }
 
 commence()
