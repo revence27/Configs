@@ -9,18 +9,18 @@ export set DESKTOPSESSIONNAME=worksess
 
 mailbox_setup_routine()
 {
-  tmux send-keys "mutt" C-m I
+  tmux send-keys -t 'Desktop.1' "mutt" C-m I
 }
 
 downloads_setup_routine()
 {
-  tmux split-window -p 15 -c "$DLDIR"
-  tmux send-keys "$YTDL " C-l
+  tmux split-window -t 'Desktop.0' -p 15 -c "$DLDIR"
+  tmux send-keys -t 'Desktop.1' "$YTDL " C-l
 }
 
 newsreader_setup_routine()
 {
-  tmux send-keys C-l 'BitchX' C-m
+  tmux send-keys -t 'Desktop.0' C-l 'BitchX' C-m
 }
 
 workdirectories_routine()

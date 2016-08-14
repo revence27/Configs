@@ -100,6 +100,11 @@ session_expansion_routine()
   done
 }
 
+project_init()
+{
+  source .tmuxrc && init_tmux_windows `pwd`
+}
+
 TVZRC=~/.tvzrc
 test -f $TVZRC && source $TVZRC
 
@@ -152,13 +157,13 @@ misc_tmux_options()
 
 tmux_desktop_environment()
 {
-  tmux rename-session $DESKTOPSESSIONNAME
+  # tmux rename-session $DESKTOPSESSIONNAME
   tmux rename-window 'Desktop'
-  tmux split-window -h -p 40
+  tmux split-window -t 'Desktop.0' -h -p 40
   for sr in mailbox_setup_routine downloads_setup_routine newsreader_setup_routine
   do
     ${sr}
-    tmux select-pane -t 0
+    tmux select-pane -l
   done
 }
 
