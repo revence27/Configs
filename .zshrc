@@ -17,11 +17,13 @@ ZSH_THEME="robbyrussell"
 plugins=(git rails ruby)
 
 # User configuration
-export set ISSM_ROOT="$HOME/intel/issm_2016.0.019"
-export set IAMCU_TOOLCHAIN_DIR="$ISSM_ROOT/tools/tools"
 export set DLDIR="$HOME/Downloads"
 export set YTDIR="$DLDIR/vidfiles/yt"
 export set HACKS="$HOME/Documents/Hacks"
+export set QMSI_ROOT="$HACKS/qmsi"
+export set ISSM_ROOT="$HACKS/issm-lx"
+export set IAMCU_TOOLCHAIN_DIR="$ISSM_ROOT/tools/compiler/gcc-ia/5.2.1/bin"
+export set ARCMCU_TOOLCHAIN_DIR="$ISSM_ROOT/tools/compiler/gcc-arc/4.8.5/bin"
 export set NETWORKCONTENT="$HACKS/content"
 export set WINFILES="$NETWORKCONTENT/files"
 export set WINPROJS="$NETWORKCONTENT/windows"
@@ -49,6 +51,13 @@ export LANGUAGE=en_GB
 export LANG=en_GB
 export LC_TYPE=en_GB.UTF-8
 export LC_CTYPE=en_GB.UTF-8
+export LC_TIME=en_GB
+export LC_PAPER=en_GB
+export LC_NUMERIC=en_GB
+export LC_MONETARY=en_UG
+export LC_MEASUREMENT=en_GB
+export LC_IDENTIFICATION=en_UG
+export LC_ADDRESS=rw_RW
 export IRCNICK="LeCamarade"
 export IRCUSER="LeCamarade"
 export IRCNAME="LeCamarade"
@@ -58,7 +67,6 @@ alias ls='ls --color'
 alias ping='ping -a'
 alias sml='rlwrap sml'
 alias ocaml='rlwrap ocaml'
-alias yout=youtube-dl
 alias youtube-dl='youtube-dl --write-sub --sub-lang en,fr --no-part -o "%(title)s-%(format)s-%(id)s.%(ext)s" --no-playlist -fbest'
 alias yautube-dl='/usr/bin/youtube-dl --no-part -A -xk --audio-format mp3 --audio-quality 0 -fbest'
 alias wget='wget -Sc'
@@ -127,6 +135,7 @@ rebind_tmux_keys()
   tmux bind-key -n S-F4       send-keys -t 0 Escape Escape ':x' C-m C-l C-d
   tmux bind-key -n F4         send-keys -t 0 Escape Escape ':xa' C-m C-l C-d
   tmux bind-key -n F5         send-keys -t 1 C-c C-l "make test" C-m
+  tmux bind-key -n S-F5       send-keys "vi -S .ide.vim" C-m
   tmux bind-key -n F6         send-keys -t 1 C-c C-l "make install" C-m
   tmux bind-key -n F7         send-keys -t 1 C-c C-l "make publish" C-m
   tmux bind-key -n F8         send-keys -t 1 C-c C-l "make clean" C-m
@@ -138,21 +147,21 @@ misc_tmux_options()
   # tmux set-option         -sg escape-time 0
   # tmux setw               -g mode-mouse on
   # tmux setw               -g monitor-activity on
-  tmux setw               -g mode-keys vi
-  tmux set-option         -g status-keys vi
-  tmux set-option         -g history-limit 10000
-  tmux set-window-option  -g automatic-rename on
+  # tmux setw               -gq mode-keys vi
+  # tmux set-option         -gq status-keys vi
+  tmux set-option         -gq history-limit 10000
+  tmux set-window-option  -gq automatic-rename on
   # tmux set-option         -g set-titles on
-  tmux set-option         -g status-bg green
-  tmux set-option         -g status-fg black
-  tmux set-option         -g window-status-current-bg white
-  tmux set-option         -g window-status-current-fg black
-  tmux set-option         -g window-status-current-attr bold
-  tmux set-option         -g status-interval 60
-  tmux set-option         -g status-left-length 30
-  tmux set-option         -g status-right-length 60
-  tmux set-option         -g status-left '#[fg=black][#S]#[default]' ##[fg=white]#(cut -d " " -f 1-3 /proc/loadavg)'
-  tmux set-option         -g status-right '#[fg=yellow]%H:%M#[default] #[fg=white]#(whoami)@#H#[default] #[fg=yellow]%A, %d %B, %Y#[default]'
+  tmux set-option         -gq status-bg green
+  tmux set-option         -gq status-fg black
+  tmux set-option         -gq window-status-current-bg white
+  tmux set-option         -gq window-status-current-fg black
+  tmux set-option         -gq window-status-current-attr bold
+  tmux set-option         -gq status-interval 60
+  tmux set-option         -gq status-left-length 30
+  tmux set-option         -gq status-right-length 60
+  tmux set-option         -gq status-left '#[fg=black][#S]#[default]' ##[fg=white]#(cut -d " " -f 1-3 /proc/loadavg)'
+  tmux set-option         -gq status-right '#[fg=yellow]%H:%M#[default] #[fg=white]#(whoami)@#H#[default] #[fg=yellow]%A, %d %B, %Y#[default]'
 }
 
 tmux_desktop_environment()
@@ -171,6 +180,12 @@ start_tmux_desktop()
 {
   tmux_desktop_environment
   session_expansion_routine
+}
+
+downloads_setup_routine()
+{
+  tmux split-window -t 'Desktop.0' -p 15 -c "$DLDIR"
+  tmux send-keys -t 'Desktop.1' "$YTDL " C-l
 }
 
 commence()

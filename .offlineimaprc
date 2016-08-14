@@ -1,0 +1,21 @@
+[general]
+ui = ttyui
+accounts = PivotAccess
+
+[Account PivotAccess]
+localrepository = PivotAccess-Local
+remoterepository = PivotAccess-Remote
+
+[Repository PivotAccess-Local]
+type = Maildir
+localfolders = ~/Mail/PivotAccess
+
+[Repository PivotAccess-Remote]
+type = IMAP
+remotehost = webmail.pivotaccess.com
+remoteuser = k.revence@pivotaccess.com
+remotepass = ooSaroh4
+realdelete = no
+maxconnections = 3
+cert_fingerprint = 1cad910cad3d1efeb3b0ed056d1fa44ca3f92d8e
+# sslcacertfile = /etc/ssl/certs/ca-certificates.crt
