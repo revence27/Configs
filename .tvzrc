@@ -7,6 +7,7 @@ echo $COLORTERM | grep xfce4-terminal 2>&1 > /dev/null && export set TERMBACKGRO
 
 export set DESKTOPSESSIONNAME=worksess
 export set WEBWORKDIR="$HACKS/sundry/septuagintal"
+export set EMBWORKDIR="$HACKS/pivot/embedded"
 export set MAINWORKDIR=$WEBWORKDIR
 
 alias yout='youtube-dl'
@@ -24,20 +25,22 @@ newsreader_setup_routine()
 {
   tmux send-keys C-l 'BitchX' C-m
   tmux split-window -c $1 -t 'Desktop.0' -p 75
-  tmux send-keys -t 'Desktop.3' C-l 'vi -S .ide.vim'
+  tmux send-keys -t 'Desktop.3' C-l 'vi -S .ide.vim' C-m
   tmux set-environment EDITOR_PANE 3
   tmux split-window -c $1 -t 'Desktop.3' -h -p 25
-  tmux send-keys -t 'Desktop.4' C-l 'server'
+  tmux send-keys -t 'Desktop.4' C-l './egrapha.pl6 --scgi-port=9002 --bible-table=bible --translation=lug --static=static --templates=templates --max-random-verses=30 --appname=Rhema server' C-m
   tmux split-window -c $1 -t 'Desktop.4' -p 50
-  tmux send-keys -t 'Desktop.5' C-l 'sass'
+  tmux send-keys -t 'Desktop.5' C-l 'sass --watch -c static/stylesheets' C-m
   tmux split-window -c $1 -t 'Desktop.5' -p 50
-  tmux send-keys -t 'Desktop.6' C-l 'coffee'
+  tmux send-keys -t 'Desktop.6' C-l 'coffee --watch -cb static/javascripts' C-m
   tmux split-window -c $1 -t 'Desktop.7' -h -p 40
-  tmux send-keys -t 'Desktop.7' C-l 'prince'
+  COMPILE_COMMAND='./egrapha.pl6 --scgi-port=9002 --bible-table=bible --translation=lug --static=static --templates=templates --max-random-verses=30 --appname=Rhema prints /lectionary && xpdf -upw r1e2v3 /tmp/out.pdf'
+  tmux send-keys -t 'Desktop.7' C-l $COMPILE_COMMAND C-m
+  tmux set-environment COMPILE_COMMAND $COMPILE_COMMAND
   tmux set-environment COMPILER_PANE 7
 }
 
 workdirectories_routine()
 {
-  echo $WEBWORKDIR;
+  echo $EMBWORKDIR;
 }

@@ -140,7 +140,7 @@ rebind_tmux_keys()
   tmux bind-key -n C-s        run-shell -b 'tmux send-keys -t `tmux show-environment EDITOR_PANE | cut -d= -f2` Escape Escape ":w" C-m Escape a'
   tmux bind-key -n S-F4       run-shell -b 'tmux send-keys -t `tmux show-environment EDITOR_PANE | cut -d= -f2` Escape Escape ":x" C-m C-l C-d'
   tmux bind-key -n F4         run-shell -b 'tmux send-keys -t `tmux show-environment EDITOR_PANE | cut -d= -f2` Escape Escape ":xa" C-m C-l C-d'
-  tmux bind-key -n F5         run-shell -b 'tmux send-keys -t `tmux show-environment COMPILER_PANE | cut -d= -f2` C-c C-l "make test" C-m'
+  tmux bind-key -n F5         run-shell -b 'tmux send-keys -t `tmux show-environment COMPILER_PANE | cut -d= -f2` C-c C-l "`tmux show-environment COMPILE_COMMAND | cut -d= -f2-`" C-m'
   tmux bind-key -n S-F5       run-shell -b 'tmux send-keys "vi -S .ide.vim" C-m'
   tmux bind-key -n F6         run-shell -b 'tmux send-keys -t `tmux show-environment COMPILER_PANE | cut -d= -f2` C-c C-l "make install" C-m'
   tmux bind-key -n F7         run-shell -b 'tmux send-keys -t `tmux show-environment COMPILER_PANE | cut -d= -f2` C-c C-l "make publish" C-m'
