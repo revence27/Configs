@@ -127,3 +127,4 @@ set sw=2
 set gfn=CMU\ Typewriter\ Text\ Ultra-Light\ 13
 digraph ZZ 8484
 digraph \\ 955
+set noequalalways
