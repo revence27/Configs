@@ -25,6 +25,12 @@ export set ISSM_BSP="$HACKS/issm/firmware/bsp/1.0"
 export set ISSM_ROOT="$HACKS/issm-lx"
 export set IAMCU_TOOLCHAIN_DIR="$ISSM_ROOT/tools/compiler/gcc-ia/5.2.1/bin"
 export set ARCMCU_TOOLCHAIN_DIR="$ISSM_ROOT/tools/compiler/gcc-arc/4.8.5/bin"
+export set OPENOCD_DIR="$ISSM_ROOT/tools/debugger/openocd"
+export set OPENOCD_WDIR="$OPENOCD_DIR/scripts"
+export set OPENOCD_TOOL="$OPENOCD_DIR/bin/openocd"
+export set OPENOCD_CONF="$OPENOCD_DIR/scripts/board/quark_d2000_onboard.cfg"
+export set QUARK_TTY_DEVICE="/dev/ttyUSB1"
+export set QUARK_TTY_BAUDRT=115200
 export set NETWORKCONTENT="$HACKS/content"
 export set WINFILES="$NETWORKCONTENT/files"
 export set WINPROJS="$NETWORKCONTENT/windows"
@@ -129,17 +135,17 @@ rebind_tmux_keys()
   tmux bind-key -n M-Down     send-keys      Escape C-w Down
   tmux bind-key -n M-Up       send-keys      Escape C-w Up
   # tmux bind-key -n C-r        send-keys      Escape C-c C-l Up C-m
-  tmux bind-key -n C-PgDn     send-keys -t 0 gt
-  tmux bind-key -n C-PgUp     send-keys -t 0 gT
-  tmux bind-key -n C-s        send-keys -t 0 Escape Escape ':w' C-m Escape a
-  tmux bind-key -n S-F4       send-keys -t 0 Escape Escape ':x' C-m C-l C-d
-  tmux bind-key -n F4         send-keys -t 0 Escape Escape ':xa' C-m C-l C-d
-  tmux bind-key -n F5         send-keys -t 4 C-c C-l "make test" C-m
-  tmux bind-key -n S-F5       send-keys "vi -S .ide.vim" C-m
-  tmux bind-key -n F6         send-keys -t 1 C-c C-l "make install" C-m
-  tmux bind-key -n F7         send-keys -t 1 C-c C-l "make publish" C-m
-  tmux bind-key -n F8         send-keys -t 1 C-c C-l "make clean" C-m
-  tmux bind-key -n F9         send-keys -t 1 C-c C-l "make publish" C-m
+  tmux bind-key -n C-PgDn     run-shell -b 'tmux send-keys -t `tmux show-environment EDITOR_PANE | cut -d= -f2` gt'
+  tmux bind-key -n C-PgUp     run-shell -b 'tmux send-keys -t `tmux show-environment EDITOR_PANE | cut -d= -f2` gT'
+  tmux bind-key -n C-s        run-shell -b 'tmux send-keys -t `tmux show-environment EDITOR_PANE | cut -d= -f2` Escape Escape ":w" C-m Escape a'
+  tmux bind-key -n S-F4       run-shell -b 'tmux send-keys -t `tmux show-environment EDITOR_PANE | cut -d= -f2` Escape Escape ":x" C-m C-l C-d'
+  tmux bind-key -n F4         run-shell -b 'tmux send-keys -t `tmux show-environment EDITOR_PANE | cut -d= -f2` Escape Escape ":xa" C-m C-l C-d'
+  tmux bind-key -n F5         run-shell -b 'tmux send-keys -t `tmux show-environment COMPILER_PANE | cut -d= -f2` C-c C-l "make test" C-m'
+  tmux bind-key -n S-F5       run-shell -b 'tmux send-keys "vi -S .ide.vim" C-m'
+  tmux bind-key -n F6         run-shell -b 'tmux send-keys -t `tmux show-environment COMPILER_PANE | cut -d= -f2` C-c C-l "make install" C-m'
+  tmux bind-key -n F7         run-shell -b 'tmux send-keys -t `tmux show-environment COMPILER_PANE | cut -d= -f2` C-c C-l "make publish" C-m'
+  tmux bind-key -n F8         run-shell -b 'tmux send-keys -t `tmux show-environment COMPILER_PANE | cut -d= -f2` C-c C-l "make clean" C-m'
+  tmux bind-key -n F9         run-shell -b 'tmux send-keys -t `tmux show-environment COMPILER_PANE | cut -d= -f2` C-c C-l "make publish" C-m'
 }
 
 misc_tmux_options()
@@ -149,6 +155,9 @@ misc_tmux_options()
   # tmux setw               -g monitor-activity on
   # tmux setw               -gq mode-keys vi
   # tmux set-option         -gq status-keys vi
+  tmux set-environment        EDITOR_PANE    0
+  tmux set-environment        COMPILER_PANE  1
+  tmux set-environment        DEBUGGER_PANE  3
   tmux set-option         -gq history-limit 10000
   tmux set-option         -g  default-terminal "screen-256color"
   # tmux set-option         -g  allow-rename off
@@ -175,7 +184,7 @@ tmux_desktop_environment()
   tmux split-window -t 'Desktop.0' -h -p 40
   for sr in mailbox_setup_routine downloads_setup_routine newsreader_setup_routine
   do
-    ${sr}
+    ${sr} $MAINWORKDIR
     tmux select-pane -l
   done
 }
@@ -189,7 +198,7 @@ start_tmux_desktop()
 downloads_setup_routine()
 {
   tmux split-window -t 'Desktop.0' -p 15 -c "$DLDIR"
-  tmux send-keys -t 'Desktop.2' "$YTDL " C-l
+  tmux send-keys -t 'Desktop.3' "$YTDL " C-l
 }
 
 commence()
@@ -197,8 +206,8 @@ commence()
   cd ~
   # tmux
   # tmux new-session -AD -n Basic
-  rebind_tmux_keys
   misc_tmux_options
+  rebind_tmux_keys
   start_tmux_desktop
 }
 
