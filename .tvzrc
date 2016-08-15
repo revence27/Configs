@@ -26,8 +26,8 @@ newsreader_setup_routine()
 
 workdirectories_routine()
 {
-  echo "$HACKS/fulcrum-backend"
-  echo $EMBWORKDIR
-  echo "$HACKS/pivot-embedded"
+  # echo "$HACKS/fulcrum-backend"
+  # echo $EMBWORKDIR
+  # echo "$HACKS/pivot-embedded"
   echo "$HACKS/workspace/poc"
 }

@@ -21,6 +21,7 @@ export set DLDIR="$HOME/Downloads"
 export set YTDIR="$DLDIR/vidfiles/yt"
 export set HACKS="$HOME/Documents/Hacks"
 export set QMSI_ROOT="$HACKS/qmsi"
+export set ISSM_BSP="$HACKS/issm/firmware/bsp/1.0"
 export set ISSM_ROOT="$HACKS/issm-lx"
 export set IAMCU_TOOLCHAIN_DIR="$ISSM_ROOT/tools/compiler/gcc-ia/5.2.1/bin"
 export set ARCMCU_TOOLCHAIN_DIR="$ISSM_ROOT/tools/compiler/gcc-arc/4.8.5/bin"
@@ -46,17 +47,16 @@ export BROWSER='w3m -T text/html'
 export DESKTOP="$HOME/Desktop"
 export GOROOT="/home/revence/Documents/Hacks/sundry/go_appengine"
 export DISPLAY=:0
-export LC_ALL=en_GB.UTF-8
-export LANGUAGE=en_GB
 export LANG=en_GB
-export LC_TYPE=en_GB.UTF-8
+export LANGUAGE=en:en_GB
+export LC_ALL=en_GB.UTF-8
 export LC_CTYPE=en_GB.UTF-8
-export LC_TIME=en_GB
+export LC_TIME=en_GB.UTF-8
 export LC_PAPER=en_GB
-export LC_NUMERIC=en_GB
-export LC_MONETARY=en_UG
+export LC_NUMERIC=en_GB.UTF-8
+export LC_MONETARY=en_US.UTF-8
 export LC_MEASUREMENT=en_GB
-export LC_IDENTIFICATION=en_UG
+export LC_IDENTIFICATION=en_US
 export LC_ADDRESS=rw_RW
 export IRCNICK="LeCamarade"
 export IRCUSER="LeCamarade"
@@ -108,6 +108,11 @@ session_expansion_routine()
   done
 }
 
+project_init()
+{
+  source .tmuxrc && init_tmux_windows `pwd`
+}
+
 TVZRC=~/.tvzrc
 test -f $TVZRC && source $TVZRC
 
@@ -129,7 +134,7 @@ rebind_tmux_keys()
   tmux bind-key -n C-s        send-keys -t 0 Escape Escape ':w' C-m Escape a
   tmux bind-key -n S-F4       send-keys -t 0 Escape Escape ':x' C-m C-l C-d
   tmux bind-key -n F4         send-keys -t 0 Escape Escape ':xa' C-m C-l C-d
-  tmux bind-key -n F5         send-keys -t 1 C-c C-l "make test" C-m
+  tmux bind-key -n F5         send-keys -t 4 C-c C-l "make test" C-m
   tmux bind-key -n S-F5       send-keys "vi -S .ide.vim" C-m
   tmux bind-key -n F6         send-keys -t 1 C-c C-l "make install" C-m
   tmux bind-key -n F7         send-keys -t 1 C-c C-l "make publish" C-m
@@ -145,7 +150,11 @@ misc_tmux_options()
   # tmux setw               -gq mode-keys vi
   # tmux set-option         -gq status-keys vi
   tmux set-option         -gq history-limit 10000
-  tmux set-window-option  -gq automatic-rename on
+  tmux set-option         -g  default-terminal "screen-256color"
+  # tmux set-option         -g  allow-rename off
+  # tmux set-option         -gq automatic-rename off
+  # tmux set-window-option  -gq automatic-rename off
+  # tmux set-window-option  -gq automatic-rename on
   # tmux set-option         -g set-titles on
   tmux set-option         -gq status-bg green
   tmux set-option         -gq status-fg black
@@ -180,7 +189,7 @@ start_tmux_desktop()
 downloads_setup_routine()
 {
   tmux split-window -t 'Desktop.0' -p 15 -c "$DLDIR"
-  tmux send-keys -t 'Desktop.1' "$YTDL " C-l
+  tmux send-keys -t 'Desktop.2' "$YTDL " C-l
 }
 
 commence()
