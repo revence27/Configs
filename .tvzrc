@@ -1,24 +1,26 @@
 # vim: syntax=zsh
 
-export set DLDIR="$DESKTOP/yt"
-export set YTDL="youtube-dl"
-export set TERMBACKGROUND=dark
+export set DLDIR="$DESKTOP/pendyt"
+export set YTDL="yout"
+export set TERMBACKGROUND=light
 echo $COLORTERM | grep xfce4-terminal 2>&1 > /dev/null && export set TERMBACKGROUND=dark
 
 export set DESKTOPSESSIONNAME=worksess
-export set WEBWORKDIR="$HACKS/sundry/septuagintal"
-export set EMBWORKDIR="$HACKS/pivot/embedded"
-export set MAINWORKDIR=$WEBWORKDIR
+export set WORKMAILDIR="$HOME/Mail/PivotAccess"
+export set DFTMAILDIR="$HOME/Mail/Default"
+# export set EMBWORKDIR="$HACKS/fulcrum-pos"
+export set EMBWORKDIR="$HACKS/workspace/poc"
+export set MAINWORKDIR=$EMBWORKDIR
 
-alias yout='youtube-dl'
+alias yout='youloader --pause=60'
 
 mailbox_setup_routine()
 {
   tmux split-window -t 'Desktop.1' -p 50
   tmux split-window -t 'Desktop.1' -p 50
-  tmux send-keys -t 'Desktop.1' "mutt" C-m I
+  tmux send-keys -t 'Desktop.1' "mutt -f $WORKMAILDIR/INBOX" C-m
   tmux send-keys -t 'Desktop.2' 'w3m http://google.com/' C-m
-  tmux send-keys -t 'Desktop.3' "perl6" C-m
+  tmux send-keys -t 'Desktop.3' "mutt -f $DFTMAILDIR/Inbox" C-m
 }
 
 newsreader_setup_routine()
@@ -28,19 +30,22 @@ newsreader_setup_routine()
   tmux send-keys -t 'Desktop.3' C-l 'vi -S .ide.vim' C-m
   tmux set-environment EDITOR_PANE 3
   tmux split-window -c $1 -t 'Desktop.3' -h -p 25
-  tmux send-keys -t 'Desktop.4' C-l './egrapha.pl6 --scgi-port=9002 --bible-table=bible --translation=lug --static=static --templates=templates --max-random-verses=30 --appname=Rhema server' C-m
+  tmux send-keys -t 'Desktop.4' C-l "screen $QUARK_TTY_DEVICE $QUARK_TTY_BAUDRT" C-m
   tmux split-window -c $1 -t 'Desktop.4' -p 50
-  tmux send-keys -t 'Desktop.5' C-l 'sass --watch -c static/stylesheets' C-m
+  tmux send-keys -t 'Desktop.5' C-l "$OPENOCD_TOOL -s $OPENOCD_WDIR -f $OPENOCD_CONF" C-m
   tmux split-window -c $1 -t 'Desktop.5' -p 50
-  tmux send-keys -t 'Desktop.6' C-l 'coffee --watch -cb static/javascripts' C-m
+  tmux send-keys -t 'Desktop.6' C-l 'await_oocd() { ( sleep 5 && ps aux | grep -v grep | grep openocd ) || ( sleep 5 && await_oocd ) } ; await_oocd || ( sleep 5 && await_oocd ) ; telnet localhost 4444' C-m
   tmux split-window -c $1 -t 'Desktop.7' -h -p 40
-  COMPILE_COMMAND='./egrapha.pl6 --scgi-port=9002 --bible-table=bible --translation=lug --static=static --templates=templates --max-random-verses=30 --appname=Rhema prints /lectionary && xpdf -upw r1e2v3 /tmp/out.pdf'
-  tmux send-keys -t 'Desktop.7' C-l $COMPILE_COMMAND C-m
-  tmux set-environment COMPILE_COMMAND $COMPILE_COMMAND
+  tmux set-environment DEBUGGER_PANE 6
+  # tmux send-keys -t 'Desktop.7' 'export set DEBUGGER_PANE=6' C-m C-l
+  tmux send-keys -t 'Desktop.7' C-l 'make test' C-m
   tmux set-environment COMPILER_PANE 7
 }
 
 workdirectories_routine()
 {
-  echo $EMBWORKDIR;
+  # echo "$HACKS/fulcrum-backend"
+  # echo $EMBWORKDIR
+  echo "$HACKS/pivot-embedded"
+  # echo "$HACKS/workspace/poc"
 }
