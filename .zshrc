@@ -21,16 +21,18 @@ export set DLDIR="$HOME/Downloads"
 export set YTDIR="$DLDIR/vidfiles/yt"
 export set HACKS="$HOME/Documents/Hacks"
 export set QMSI_ROOT="$HACKS/qmsi"
-export set ISSM_BSP="$HACKS/issm/firmware/bsp/1.0"
-export set ISSM_ROOT="$HACKS/issm-lx"
+export set ISSM_ROOT="$HACKS/issm"
+#export set ISSM_BSP="$ISSM_ROOT/firmware/bsp/1.1"
+export set ISSM_BSP="$ISSM_ROOT/firmware/bsp/1.1"
 export set IAMCU_TOOLCHAIN_DIR="$ISSM_ROOT/tools/compiler/gcc-ia/5.2.1/bin"
 export set ARCMCU_TOOLCHAIN_DIR="$ISSM_ROOT/tools/compiler/gcc-arc/4.8.5/bin"
 export set OPENOCD_DIR="$ISSM_ROOT/tools/debugger/openocd"
 export set OPENOCD_WDIR="$OPENOCD_DIR/scripts"
 export set OPENOCD_TOOL="$OPENOCD_DIR/bin/openocd"
 export set OPENOCD_CONF="$OPENOCD_DIR/scripts/board/quark_d2000_onboard.cfg"
-export set QUARK_TTY_DEVICE="/dev/ttyUSB1"
+export set QUARK_TTY_DEVICE="/dev/ttyUSB0"
 export set QUARK_TTY_BAUDRT=115200
+export set GOROOT="/home/revence/Documents/Hacks/sundry/go_appengine"
 export set NETWORKCONTENT="$HACKS/content"
 export set WINFILES="$NETWORKCONTENT/files"
 export set WINPROJS="$NETWORKCONTENT/windows"
@@ -51,7 +53,6 @@ export EDITOR=vim
 export CVSEDITOR=$EDITOR
 export BROWSER='w3m -T text/html'
 export DESKTOP="$HOME/Desktop"
-export GOROOT="/home/revence/Documents/Hacks/sundry/go_appengine"
 export DISPLAY=:0
 export LANG=en_GB
 export LANGUAGE=en:en_GB
@@ -77,6 +78,7 @@ alias youtube-dl='youtube-dl --write-sub --sub-lang en,fr --no-part -o "%(title)
 alias yautube-dl='/usr/bin/youtube-dl --no-part -A -xk --audio-format mp3 --audio-quality 0 -fbest'
 alias wget='wget -Sc'
 alias pivotapp="ssh -t pivotweb 'ssh -t apps env LD_LIBRARY_PATH=/usr/local/lib:/lib:/usr/lib tmux attach'"
+alias pivotup="git push midway master && ssh -t pivotweb 'git --git-dir=git_repositories/fulcrum-backend/.git push appserv master'"
 alias mpg123='mpg123 -C'
 alias guile='rlwrap guile'
 alias racket='rlwrap racket'
@@ -155,9 +157,9 @@ misc_tmux_options()
   # tmux setw               -g monitor-activity on
   # tmux setw               -gq mode-keys vi
   # tmux set-option         -gq status-keys vi
-  tmux set-environment        EDITOR_PANE    0
-  tmux set-environment        COMPILER_PANE  1
-  tmux set-environment        DEBUGGER_PANE  3
+  # tmux set-environment        EDITOR_PANE    '1.0'
+  # tmux set-environment        COMPILER_PANE  '1.1'
+  # tmux set-environment        DEBUGGER_PANE  '1.3'
   tmux set-option         -gq history-limit 10000
   tmux set-option         -g  default-terminal "screen-256color"
   # tmux set-option         -g  allow-rename off
@@ -198,7 +200,7 @@ start_tmux_desktop()
 downloads_setup_routine()
 {
   tmux split-window -t 'Desktop.0' -p 15 -c "$DLDIR"
-  tmux send-keys -t 'Desktop.3' "$YTDL " C-l
+  tmux send-keys -t 'Desktop.6' "$YTDL " C-l
 }
 
 commence()

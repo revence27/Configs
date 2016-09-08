@@ -125,6 +125,6 @@ endif
 set expandtab
 set sw=2
 set gfn=CMU\ Typewriter\ Text\ Ultra-Light\ 13
+set noequalalways
 digraph ZZ 8484
 digraph \\ 955
-set noequalalways
