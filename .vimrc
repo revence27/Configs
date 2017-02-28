@@ -106,15 +106,44 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
     \ }
 
+let g:webdevicons_enable_airline_statusline = 1
+let g:webdevicons_enable_airline_tabline = 1
+let g:tmuxline_preset = 'nightly_fox'
+" let g:tmuxline_preset = 'full'
+" let g:tmuxline_preset = 'tmux'
+" let g:tmuxline_powerline_separators = 0
+" let g:tmuxline_separators = {
+"     \ 'left' : '',
+"     \ 'left_alt': '>',
+"     \ 'right' : '',
+"     \ 'right_alt' : '<',
+"     \ 'space' : ' '}
+let g:tmuxline_theme = 'zenburn'
+
+let g:airline_theme='luna'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:VimMailStartFlags="t"
+
+map <C-n> :NERDTreeToggle<CR>
+
 execute pathogen#infect()
 syntax enable
 filetype plugin indent on
 
+map <C-PageUp>    :tabprev<cr>
+map <C-PageDown>  :tabnext<cr>
+
+set splitbelow
+set splitright
 set autoindent
 set tabstop=2
 set nohlsearch
 set nobackup
 set bg=dark
+execute "set bg=" . $TERMBACKGROUND
 if v:progname =~? "gvim"
   set bg=light
 endif
@@ -123,3 +152,4 @@ set sw=2
 set gfn=CMU\ Typewriter\ Text\ Ultra-Light\ 13
 digraph ZZ 8484
 digraph \\ 955
+set noequalalways
