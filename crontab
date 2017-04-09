@@ -1,21 +1,40 @@
-PATH=/home/revence/.rakudobrew/moar-nom/install/bin:/home/revence/.rakudobrew/moar-nom/install/share/perl6/site/bin:/home/revence/Documents/Hacks/sundry/rakudo-star-2016.04/install/bin:/home/revence/Documents/Hacks/sundry/rakudo-star-2016.04/install/share/perl6/site/bin:/home/revence/.rakudobrew/bin:/home/revence/.local/bin:/home/revence/Documents/Hacks/issm-lx:/home/revence/Documents/Hacks/issm-lx/tools/compiler/bin:/home/revence/Documents/Hacks/sundry/bin::/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+PATH=/home/revence/.rakudobrew/moar-nom/install/bin:/home/revence/.rakudobrew/moar-nom/install/share/perl6/site/bin:/home/revence/Documents/Hacks/sundry/rakudo-star-2016.07/install/bin:/home/revence/Documents/Hacks/sundry/rakudo-star-2016.07/install/share/perl6/site/bin:/home/revence/.rakudobrew/bin:/home/revence/.local/bin:/home/revence/Documents/Hacks/issm-lx:/home/revence/Documents/Hacks/issm-lx/tools/compiler/bin:/home/revence/Documents/Hacks/sundry/bin:/home/revence/Documents/Hacks/sundry/go_appengine:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/revence/.rakudobrew/moar-nom/install/bin:/home/revence/.rakudobrew/moar-nom/install/share/perl6/site/bin:/home/revence/Documents/Hacks/sundry/rakudo-star-2016.07/install/bin:/home/revence/Documents/Hacks/sundry/rakudo-star-2016.07/install/share/perl6/site/bin:/home/revence/.rakudobrew/bin:/home/revence/.local/bin:/home/revence/Documents/Hacks/issm-lx:/home/revence/Documents/Hacks/issm-lx/tools/compiler/bin:/home/revence/Documents/Hacks/sundry/bin::/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
 
 HOME=/home/revence
+DESKTOP=/home/revence/Desktop
+YTDL=/home/revence/Desktop/yt
 EGRAPHA=/home/revence/Documents/Hacks/sundry/septuagintal
+EMBEDDED=/home/revence/Documents/Hacks/pivot/embedded
 MUSICDIR=/home/revence/Desktop/Misc/Music
 ARDUINO_PORT=/dev/ttyACM0
+THERMPRINTPORT=/dev/ttyUSB0
+RTYTFEED='https://www.youtube.com/feeds/videos.xml?channel_id=UCpwvZwUam-URkxB7g4USKpg'
 
 # minute hour     dom month dow
-1         8       *   *   1-5   cd $EGRAPHA && bin/generadorimprimador r1e2v3 2> /dev/null > /dev/null
-*/30      8-9     *   *   1-5   cd $EGRAPHA &&  echo -n "\n" | bin/serportest $ARDUINO_PORT 2> /dev/null > /dev/null
-1-30/5    9       *   *   1-5   cd $EGRAPHA &&  echo -n "\n" | bin/serportest $ARDUINO_PORT 2> /dev/null > /dev/null
-1         9       *   *   1-5   tmux 2> /dev/null > /dev/null ; tmux new-window -c $MUSICDIR 'ls | sort -R | head -n 15 | mpg123 -CZ -@ -'
-31-45/1   9       *   *   1-5   cd $EGRAPHA &&  echo -n "\n" | bin/serportest $ARDUINO_PORT 2> /dev/null > /dev/null
-49        9       *   *   1-5   killall -9 mpg123 ; cd $EGRAPHA &&  echo -n "\r\n" | bin/serportest $ARDUINO_PORT 2> /dev/null > /dev/null
+@reboot mocp -S 2> /dev/null > /dev/null
+# 1         8       *   *   *     cd $EGRAPHA  && bin/generadorimprimador r1e2v3 $THERMPRINTPORT
+# @hourly                         cd $EGRAPHA && bin/vidfeeds 4 $YTDL $RTYTFEED
+# */30      8-9     *   *   1-5   cd $EMBEDDED && echo "alarm time 1" | support/serportest $ARDUINO_PORT 2> /dev/null > /dev/null
+# 1-30/5    9       *   *   1-5   cd $EMBEDDED && echo "alarm time 1" | support/serportest $ARDUINO_PORT 2> /dev/null > /dev/null
+# 10        8       *   *   1-5   tmux 2> /dev/null > /dev/null ; tmux new-window -c $MUSICDIR 'ls | sort -R | head -n 15 | mpg123 -CZ -@ -'
+10        8       *   *   1-5   amixer sset Speaker '50' 2> /dev/null > /dev/null && amixer sset Headphone 65 2> /dev/null > /dev/null && mocp -p
+# 31-45/1   9       *   *   1-5   cd $EMBEDDED && echo "alarm time 1" | support/serportest $ARDUINO_PORT 2> /dev/null > /dev/null
+# 49        9       *   *   1-5   killall -9 mpg123 ; cd $EMBEDDED &&  echo "alarm" | support/serportest $ARDUINO_PORT 2> /dev/null > /dev/null
+# 49        9       *   *   1-5   killall -9 guile 2> /dev/null > /dev/null ; killall -9 mpg123 2> /dev/null > /dev/null
+49        9       *   *   1-5   mocp -s
 
-1         12-17   *   *   1-5   cd $EGRAPHA &&  echo -n "\n" | bin/serportest $ARDUINO_PORT 2> /dev/null > /dev/null
+# 1         12-17   *   *   1-5   cd $EMBEDDED && echo "alarm time 1" | support/serportest $ARDUINO_PORT 2> /dev/null > /dev/null
 
-1         8       *   *   6-7   tmux 2> /dev/null > /dev/null ; tmux new-window -c $MUSICDIR 'ls | sort -R | head -n 15 | mpg123 -CZ -@ -'
-@midnight                     cd $EGRAPHA && echo -n "\n\n\n" | bin/serportest $ARDUINO_PORT 2> /dev/null > /dev/null
+# 1         8       *   *   6-7   tmux 2> /dev/null > /dev/null ; tmux new-window -c $MUSICDIR 'ls | sort -R | head -n 100 | mpg123 -CZ -@ -'
+1         8       *   *   6-7   mocp -p
+# @midnight                       cd $EMBEDDED && echo "alarm time 3" | support/serportest $ARDUINO_PORT 2> /dev/null > /dev/null
 
-# *         *   *   * *   cd $EGRAPHA && echo -n "\n" | bin/serportest $ARDUINO_PORT 2> /dev/null > /dev/null
+# *         *   *   * *           cd $EMBEDDED && echo "alarm time 1" | support/serportest $ARDUINO_PORT
+@reboot       tor RunAsDaemon 1 SOCKSPort 9050 2> /dev/null > /dev/null
+@reboot       sudo docker start mariadb 2> /dev/null > /dev/null
+@reboot       sudo docker start redis 2> /dev/null > /dev/null
+@reboot       sudo docker start rabbitmq 2> /dev/null > /dev/null
+@reboot       sudo docker start bitcoind 2> /dev/null > /dev/null
+@reboot       sudo docker start acxdev 2> /dev/null > /dev/null && sudo docker exec acxdev sudo service ssh restart 2> /dev/null > /dev/null && sudo docker exec -u 1000 acxdev sh -c 'cd /home/app/webapp && env SECRET_KEY_BASE=satoshi bundle exec rails s' 2>&1 >> /tmp/rails.log
+# @reboot       sudo docker start acxdev 2> /dev/null > /dev/null && sudo docker exec acxdev sudo service ssh restart 2> /dev/null > /dev/null
+# */5  * * * *  offlineimap -o 2> /dev/null > /dev/null

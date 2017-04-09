@@ -36,7 +36,7 @@ export set WINFILES="$NETWORKCONTENT/files"
 export set WINPROJS="$NETWORKCONTENT/windows"
 export set RAKBREW="$HOME/.rakudobrew"
 export set P6BREWS="$RAKBREW/moar-nom"
-export set P6HACKS="$HACKS/sundry/rakudo-star-2016.04"
+export set P6HACKS="$HACKS/sundry/rakudo-star-2016.07"
 export set P61="$P6BREWS/install/bin:$P6BREWS/install/share/perl6/site/bin"
 export set P62="$P6HACKS/install/bin:$P6HACKS/install/share/perl6/site/bin"
 export set LD_LIBRARY_PATH="$P6BREWS/install/lib:$P6HACKS/install/lib:/usr/local/lib:$LD_LIBRARY_PATH:/usr/lib:/usr/lib32"
@@ -73,7 +73,8 @@ alias ls='ls --color'
 alias ping='ping -a'
 alias sml='rlwrap sml'
 alias ocaml='rlwrap ocaml'
-alias youtube-dl='youtube-dl --write-sub --sub-lang en,fr --no-part -o "%(title)s-%(format)s-%(id)s.%(ext)s" --no-playlist -fbest'
+# alias youtube-dl='youtube-dl --write-sub --sub-lang en,fr --no-part -o "%(title)s-%(format)s-%(id)s.%(ext)s" --no-playlist -fbest'
+alias youtube-dl='youtube-dl --write-sub --sub-lang en,fr --no-part -o "%(title)s-%(format)s-%(id)s.%(ext)s" --no-playlist -fworst'
 alias yautube-dl='/usr/bin/youtube-dl --no-part -A -xk --audio-format mp3 --audio-quality 0 -fbest'
 alias wget='wget -Sc'
 alias pivotapp="ssh -t pivotweb 'ssh -t apps env LD_LIBRARY_PATH=/usr/local/lib:/lib:/usr/lib tmux attach'"
@@ -181,8 +182,8 @@ tmux_desktop_environment()
 {
   # tmux rename-session $DESKTOPSESSIONNAME
   tmux rename-window 'Desktop'
-  tmux split-window -t 'Desktop.0' -h -p 40
-  for sr in mailbox_setup_routine downloads_setup_routine newsreader_setup_routine
+  # tmux split-window -t 'Desktop.0' -h -p 40
+  for sr in mailbox_setup_routine downloads_setup_routine newsreader_setup_routine network_monitor_setup_routine music_player_setup_routine radio_player_setup_routine work_panel_setup_routine
   do
     ${sr} $MAINWORKDIR
     tmux select-pane -l
@@ -192,13 +193,13 @@ tmux_desktop_environment()
 start_tmux_desktop()
 {
   tmux_desktop_environment
-  session_expansion_routine
+  # session_expansion_routine
 }
 
 downloads_setup_routine()
 {
   tmux split-window -t 'Desktop.0' -p 15 -c "$DLDIR"
-  tmux send-keys -t 'Desktop.3' "$YTDL " C-l
+  tmux send-keys -t 'Desktop.1' "$YTDL " C-l
 }
 
 commence()
@@ -208,7 +209,8 @@ commence()
   # tmux new-session -AD -n Basic
   misc_tmux_options
   rebind_tmux_keys
-  start_tmux_desktop
+  tmux_desktop_environment
+  # start_tmux_desktop
 }
 
 compdef _macronesia macronesia
