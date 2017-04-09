@@ -32,7 +32,7 @@ newsreader_setup_routine()
 
 network_monitor_setup_routine()
 {
-  tmux split-window -t 'Desktop.3' -h -p 45
+  tmux split-window -t 'Desktop.3' -h -p 44
   tmux resize-pane -t 'Desktop.4' -Z
   tmux send-keys -t 'Desktop.4' "bmon -p wlan0" C-m
   tmux resize-pane -t 'Desktop.4' -Z
