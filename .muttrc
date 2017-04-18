@@ -2,16 +2,45 @@ set realname = "Revence Kalibwani"
 set from = "revence@1st.ug"
 set use_from = yes
 set envelope_from ="yes"
+
+unset arrow_cursor
+unset askbcc
+unset askcc
+unset beep
+unset beep_new
+set   bounce_delivered
+unset collapse_unread
+set   uncollapse_jump
+set   copy
+set   delete
+set   edit_headers
+set   fast_reply
+set   followup_to
+set   help
+unset mark_old
+unset menu_scroll
+set   narrow_tree
+set   pager_stop
+
 set sendmail="/usr/bin/msmtp"
 # If not set in environment variables:
 #   set spoolfile = /var/spool/mail/rev
-set spoolfile = ~/Mail/inbox/
+set spoolfile = ~/Mail/INBOX/
+#   set spoolfile = /var/mail/revence
 
 # Folders
-set folder="~/Mail"                # Mailboxes in here
-set record="+sent"                 # where to store sent messages
-set postponed="+postponed"         # where to store draft messages
+# set folder="~/Mail/inbox/"                # Mailboxes in here
+set folder="~/Mail/INBOX/"                # Mailboxes in here
+set record="~/Mail/sent/"
+set postponed="~/Mail/postponed/"         # where to store draft messages
 set move=no                        # Don't move mail from the spool.
+
+set trash="~/Mail/trash/"
+# unset confirmappend
+# # folder-hook . set trash="=trash"
+# # folder-hook trash$ unset trash
+
+source ~/.mutt/themes/comidia
 
 # Watch these mailboxes for new mail:
 #   mailboxes ! +Fetchmail +slrn +mutt
@@ -28,8 +57,9 @@ unignore Date: From: User-Agent: X-Mailer  \
 set pager_context=2
 set pager_index_lines=5
 auto_view text/html
-alternative_order text/enriched text/plain text/html 
-set editor="vim -c 'set tw=70 et' '+/^$' " 
+alternative_order text/html text/enriched text/plain
+# set editor="vim -c 'set tw=70 et' '+/^$' " 
+set editor="vim " 
 unset edit_headers          # See the headers when editing
 set sort_alias=alias     # sort aliases in alpha order by alias name
 set markers          # mark wrapped lines of text in the pager with a +
@@ -38,5 +68,23 @@ set pager_context=5  # Retain 5 lines of previous page when scrolling.
 set status_on_top    # Status bar on top.
 push <show-version>  # Shows mutt version at startup
 
-macro index,pager I '<shell-escape> fetchmail -v<enter>'
+# macro index,pager I '<shell-escape> fetchmail -v<enter>'
+macro index,pager I '<shell-escape> offlineimap -o<enter>'
 bind attach <return>    view-mailcap
+
+send-hook   "revence\@abapoto\.ug"              "source ~/.mutt/mutt_war_profile"
+reply-hook  "revence\@abapoto\.ug"              "source ~/.mutt/mutt_war_profile"
+send-hook   "ella\.kalibwani\@gmail\.com"       "source ~/.mutt/mutt_wife_profile"
+reply-hook  "ella\.kalibwani\@gmail\.com"       "source ~/.mutt/mutt_wife_profile"
+send-hook   "jin\.chen\@blockchainglobal\.com"  "source ~/.mutt/mutt_work_profile"
+reply-hook  "jin\.chen\@blockchainglobal\.com"  "source ~/.mutt/mutt_work_profile"
+send-hook   "i-network\@dgroups\.org"           "source ~/.mutt/mutt_inetwork_profile"
+reply-hook  "i-network\@dgroups\.org"           "source ~/.mutt/mutt_inetwork_profile"
+
+
+alias kalibwanis@gmail.com            Mummy                       <kalibwanis@gmail.com>
+alias ella.kalibwani                  Ella Kalibwani              <ella.kalibwani@gmail.com>
+alias jin.chen                        Jin Chen                    <jin.chen@blockchainglobal.com>
+alias graeme.r.hart@gmail.com         Pastor Græme R. Hart        <graeme.r.hart@gmail.com>
+alias z.brandon.fisher@gmail.com      Elder Brandon Fischer       <z.brandon.fisher@gmail.com>
+alias revence@abapoto.ug              Rev                         <revence@abapoto.ug>

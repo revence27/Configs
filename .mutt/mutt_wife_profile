@@ -1,6 +1,6 @@
 set signature='~/.signature.wife'
 # set pgp_autosign=yes
 unmy_hdr *
-my_hdr From: Rev <rev@abapoto.ug>
+my_hdr From: Rev <revence@abapoto.ug>
 
 # vim: syntax=muttrc

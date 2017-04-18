@@ -1,8 +1,12 @@
 set signature='~/.signature.work'
 # set pgp_autosign=yes
 unmy_hdr *
+unset trash
+unset record
+unset postponed
 my_hdr From: Revence Kalibwani <revence.kalibwani@acx.io>
-set sendmail="/usr/bin/msmtp -C ~/.msmptrc.work"
+set sendmail  = "/usr/bin/msmtp -C /home/revence/.msmtprc.work"
+set move      = yes
 
 set from      = 'revence.kalibwani@acx.io'
 set realname  = 'Revence Kalibwani'
