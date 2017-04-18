@@ -1,0 +1,6 @@
+set signature='~/.signature.war'
+# set pgp_autosign=yes
+unmy_hdr *
+my_hdr From: Rev <revence@abapoto.ug>
+
+# vim: syntax=muttrc

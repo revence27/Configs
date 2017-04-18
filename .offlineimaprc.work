@@ -1,0 +1,21 @@
+[general]
+accounts        = Work
+maxsyncaccounts = 3
+ui              = basic
+
+[Account Work]
+localrepository   = Local
+remoterepository  = Remote
+
+[Repository Local]
+type          = Maildir
+localfolders  = ~/Mail
+
+[Repository Remote]
+type          = Gmail
+remotehost    = imap.gmail.com
+remoteuser    = revence.kalibwani@acx.io
+remotepass    = 123pisteos+
+ssl           = yes
+realdelete    = no
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt

@@ -1,21 +1,21 @@
 [general]
-ui = ttyui
-accounts = PivotAccess
+accounts = Mail
+maxsyncaccounts = 3
+ui = basic
 
-[Account PivotAccess]
-localrepository = PivotAccess-Local
-remoterepository = PivotAccess-Remote
+[Account Mail]
+localrepository = Local
+remoterepository = Remote
 
-[Repository PivotAccess-Local]
+[Repository Local]
 type = Maildir
-localfolders = ~/Mail/PivotAccess
+localfolders = ~/Mail
 
-[Repository PivotAccess-Remote]
+[Repository Remote]
 type = IMAP
-remotehost = webmail.pivotaccess.com
-remoteuser = k.revence@pivotaccess.com
-remotepass = ooSaroh4
+remotehost = 1st.ug
+remoteuser = revence
+remotepass = 123pisteos+
+ssl = yes
 realdelete = no
-maxconnections = 3
-cert_fingerprint = 1cad910cad3d1efeb3b0ed056d1fa44ca3f92d8e
-# sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+sslcacertfile = /home/revence/.keys/mailcert.pem
