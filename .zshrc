@@ -15,6 +15,26 @@ ZSH_THEME="robbyrussell"
 
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git rails ruby)
+setxkbmap -layout dvorak -variant intl -option caps:compose
+bindkey -v
+
+tmuxise()
+{
+	tmux
+}
+
+retmuxise()
+{
+	tmux attach
+}
+
+conditionally_tmuxise()
+{
+	( test -z "$TMUX" && tmuxise )
+}
+
+conditionally_tmuxise
+
 
 # User configuration
 export set DLDIR="$HOME/Downloads"
@@ -51,7 +71,8 @@ export BROWSER='w3m -T text/html'
 export DESKTOP="$HOME/Desktop"
 export GOROOT="/home/revence/Documents/Hacks/sundry/go_appengine"
 export DISPLAY=:0
-export LANG=en_GB
+export LANG=en_GB.UTF-8
+export CHARSET=UTF-8
 export LANGUAGE=en:en_GB
 export LC_ALL=en_GB.UTF-8
 export LC_CTYPE=en_GB.UTF-8
@@ -67,7 +88,7 @@ export IRCUSER="LeCamarade"
 export IRCNAME="LeCamarade"
 export IRCSERVER="irc.freenode.net"
 
-alias ls='ls --color'
+alias ls='ls -G'
 alias ping='ping -a'
 alias sml='rlwrap sml'
 alias ocaml='rlwrap ocaml'
